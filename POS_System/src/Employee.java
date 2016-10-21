@@ -6,7 +6,6 @@ public class Employee {
 
 	//default constructor
 	public Employee(){
-		//test creation of Employee
-		System.out.println("created a new object " + this.toString());
+
 	}
 }
