@@ -29,6 +29,12 @@ public class SalesOrder {
 		public String getItemID(){
 			return (getItem().getItemID());
 		}
+		public void setSaleorderID(){
+			this.salesOrderID=salesOrderID;
+		}
+		public UUID getSaleorderID(){
+			return salesOrderID;
+		}
 		public String getname(){
 			return (getItem().getname());
 		}
