@@ -13,7 +13,11 @@ public class SupplierFileDAO {
 	private String phoneNumber;
 	private String address;
 	private boolean validEntry= false;
-	
+	private String supplierFileLocation = "./././res/SupplierFile.txt";
+	private File supplierFile= new File(supplierFileLocation);
+	private FileWriter fileWriter; //= new FileWriter(supplierFile, true);
+	private BufferedWriter buffer;
+	PrintWriter printWriter;
 	
 	public SupplierFileDAO() throws IOException{
 		
@@ -27,12 +31,6 @@ public class SupplierFileDAO {
 		this.address = supplier.getAddress();
 		this.validEntry = true;
 	}
-	
-	private String supplierFileLocation = "/Users/olaniaga/Documents/POS_DB/SupplierFile.txt";
-	private File supplierFile= new File(supplierFileLocation);
-	private FileWriter fileWriter; //= new FileWriter(supplierFile, true);
-	private BufferedWriter buffer;
-	PrintWriter printWriter;
 	
 	public void addToSupplierFile() throws IOException{
 		if (supplierFile.exists()==true && this.validEntry==true){

@@ -1,0 +1,3 @@
+userName password role
+olaniCashier 1234 cashier
+olaniManager 1234 manager

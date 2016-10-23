@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Register {
-	private final String EmployeeFile = "/Users/olaniaga/Documents/POS_DB/EmployeeFile.txt";
+	private final String EmployeeFile = "./././res/EmployeeFile.txt";
 	private int registerID;
 	private UUID registerSession;
 	private String userName;

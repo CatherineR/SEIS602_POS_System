@@ -1,0 +1,4 @@
+supplier name|first order date|last order date|phone Number|address 
+Supplier1|Sun Oct 23 17:58:44 CDT 2016|Sun Oct 23 17:58:44 CDT 2016|phone number 1|address 1
+Supplier2|Sun Oct 23 18:07:33 CDT 2016|Sun Oct 23 18:07:33 CDT 2016|phone number 2|address 2
+Suplier2|Sun Oct 23 18:49:01 CDT 2016|Sun Oct 23 18:49:01 CDT 2016|phone number 2|address 2
