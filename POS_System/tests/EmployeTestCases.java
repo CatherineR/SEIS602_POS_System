@@ -9,12 +9,10 @@ public class EmployeTestCases {
 		String userName = "olaniCashier";
 		String password = "1234";
 		Employee emp1 = new Employee(userName, password);
-		//System.out.println(emp1.login(userName, password));
 		
 		assertEquals("cashier",emp1.login(userName, password).toLowerCase(), "cashier");
 		
 
-		//fail("Not yet implemented");
 	}
 	
 	@Test
@@ -26,9 +24,28 @@ public class EmployeTestCases {
 		
 		assertEquals("manager",emp2.login(userName, password).toLowerCase(), "manager");
 		
-		//fail("Not yet implemented");
 	}
 	
+	@Test
+	public void test3() {
+		String userName = "olaniManager1";
+		String password = "1234";
+		Employee emp2 = new Employee(userName, password);
+		//System.out.println(emp1.login(userName, password));
+		
+		assertEquals("not available",emp2.login(userName, password).toLowerCase(), "not available");
+		
+	}
 	
+	@Test
+	public void test4() {
+		String userName = "olaniManager";
+		String password = "1235";
+		Employee emp2 = new Employee(userName, password);
+		//System.out.println(emp1.login(userName, password));
+		
+		assertEquals("not available",emp2.login(userName, password).toLowerCase(), "not available");
+		
+	}
 
 }
