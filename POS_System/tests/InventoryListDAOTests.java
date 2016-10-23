@@ -4,11 +4,15 @@ import org.junit.Test;
 public class InventoryListDAOTests {
 
 	@Test
-	public void test() {
+	public void testIncrement() {
 		InventoryListDAO invListDAO = new InventoryListDAO();		
 		invListDAO.adjustItemQuantity("bread", 10);			
 	}
-	
+	@Test
+	public void testDecrement() {
+		InventoryListDAO invListDAO = new InventoryListDAO();		
+		invListDAO.adjustItemQuantity("bread", -10);			
+	}
 	@Test
 	public void testAddInventoryItem() {
 		InventoryListDAO invListDAO = new InventoryListDAO();		
