@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.pb.server.Goods;
-
-import shopbean.Item;
 
 public class SalesOrder {
 	private UUID salesOrderID;
@@ -35,7 +32,6 @@ public class SalesOrder {
 		public String getname(){
 			return (getItem().getname());
 		}
-		
 		
 		
 		public double getprice(){
