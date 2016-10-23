@@ -12,34 +12,21 @@ public class SalesOrder {
 	
 	
 	 
-	public void SalesOrderItem(SalesOrderItem item){
-			setItem(item);
-			//public void incermentNum(){
-			//	setNumItem(+1);
-			//setItem(item);
-		     setNumItem(1);
-		}
-		protected void setItem(SalesOrderItem item){
+	public SalesOrder(SalesOrderItem item){
 			this.item=item;
+			setNumItem(1);
 		}
+	
 		public SalesOrderItem getItem(){
 			return this.item;
 		}
 		
-		
-		public void setSaleorderID(){
+		public void setSaleorderID(UUID salesOrderID){
 			this.salesOrderID=salesOrderID;
 		}
 		
 		public UUID getSaleorderID(){
 			return salesOrderID;
-		}
-		public String getname(){
-			return (getItem().getname());
-		}
-		
-		public double getprice(){
-			return (getItem().getprice());
 		}
 		public void setNumItem(int numItem){
 			this.numItem=numItem;
@@ -47,19 +34,34 @@ public class SalesOrder {
 		public int getNumItem(){
 			return this.numItem;
 		}
+		public int getQuantity(){
+			return (getItem().getorderQuantity());
+		}
+		
+		public String getname(){
+			return (getItem().getname());
+		}
+		
+		public double getprice(){
+			return (getItem().getprice());
+		}
+		public double gettaxRate(){
+			return(getItem().gettaxRate());
+		}
 		public double setTotalCprice(){
 			return totalPrice=((item.getprice()*(1+item.gettaxRate())*getNumItem()));
 		}
-		public double getTotal(){
+		public double getTotalprice(){
 			return this.totalPrice;
 		}
 	
-		public List<SalesOrderItem> getItemList() {
-			return itemList;
-		}
 		public void setItemList(List<SalesOrderItem> itemList) {
 			this.itemList = itemList;
 		}
+		public List<SalesOrderItem> getItemList() {
+			return itemList;
+		}
+		
 		
 		public void cancelOrder(){
 			setNumItem(0);
