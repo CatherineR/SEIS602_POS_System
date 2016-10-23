@@ -4,17 +4,23 @@ public class SalesOrderItem {
 	private double itemPrice;
 	private double subTotal;
 	private double taxRate;
-	private String ItemID;
+	private String itemID;
 	
 
-
-public void setItemID(String name,double itemPrice,double taxRate){
+public void SalesOrderItem(int orderQuantity,String name,double itemPrice,double taxRate){
 	   this.name=name;
 	   this.itemPrice=itemPrice;
 	   this.taxRate=taxRate;
+	   this.orderQuantity=orderQuantity;
+}
+public String setItemID(String itemId){
+	   return this.itemID = itemID;
 }
 public String getItemID(){
-	   return this.ItemID;
+	   return this.itemID;
+}
+public int getorderQuantity(){
+	   return this.orderQuantity;
 }
 public String getname(){
 	   return this.name;
