@@ -14,7 +14,6 @@ public class Register {
 	private int loginAttempts = 1;
 	
 	public void login(){
-		//System.out.println("to be implemented");
 		this.scan = new Scanner(System.in);
 		System.out.println("Please insert user name followed by password");
 		String userName = scan.next();
@@ -23,7 +22,7 @@ public class Register {
 		if(!isLoggedIn){
 		Employee currnetEmployee = new Employee(userName, password);
 		employeeRole = currnetEmployee.login(userName, password);
-		//System.out.println(currnetEmployee.login(userName, password));
+		
 		}
 		if (employeeRole.toLowerCase().equals("manager") || employeeRole.toLowerCase().equals("cashier")){
 			this.isLoggedIn = true;
@@ -48,7 +47,6 @@ public class Register {
 	}
 	
 	public void logout(){
-		//System.out.println("to be implemented");
 		this.sessionEndTime = new Date();
 		this.isLoggedIn = false;
 		System.out.println(this.userName + ": You have successfully logged out of the system.\nLogoff time: " + this.sessionEndTime);

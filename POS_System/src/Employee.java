@@ -27,12 +27,12 @@ public class Employee {
 	
 	//create a user user name and 
 	public String login(String userName, String password){
-		//Employee currnetEmployee = new Employee(userName, password);
+		
 		String userRole=checkEmployeeCredential(userName, password);
 		if(userRole.toLowerCase().equals("manager") 
 				|| userRole.toLowerCase().equals("cashier")){
 			this.role = userRole;
-			//System.out.println("Log in has been authorized. userName: "+ userName +"\t userRole: " + userRole);
+			
 		}
 		
 		return this.role;
