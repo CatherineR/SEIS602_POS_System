@@ -49,14 +49,32 @@ public class InventoryListDAO {
 		}	
 	}
 	
-	public List<InventoryItem> getInventoryList() {	
-		List<InventoryItem> inventoryList = new ArrayList<InventoryItem>();				
+	private List<InventoryItem> jsonToInvList(JSONArray json){
+		//Convert JsonArray to List of Inventory Items
+		List<InventoryItem> inventoryList = new ArrayList<InventoryItem>();	
+		
+		//Using gson library for conversion
+		Type listOfTestObject = new TypeToken<List<InventoryItem>>(){}.getType();
+		String s = new Gson().toJson(json, listOfTestObject);		
+		inventoryList = new Gson().fromJson(s, listOfTestObject);	
+		
+		return inventoryList;
+	}
+	
+	private JsonArray invListToJson(List<InventoryItem> list){
+		//Using gson library for conversion
+		Gson gson = new Gson();
+		JsonElement element = gson.toJsonTree(list, new TypeToken<List<InventoryItem>>() {}.getType());
+		JsonArray jsonArray = element.getAsJsonArray();	
+		
+		return jsonArray;
+	}
+	
+	public List<InventoryItem> getInventoryList() {				
 		JSONObject jsonObject = openFile();
 		JSONArray inventoryItems = (JSONArray) jsonObject.get("inventoryItems");
-			
-		Type listOfTestObject = new TypeToken<List<InventoryItem>>(){}.getType();
-		String s = new Gson().toJson(inventoryItems, listOfTestObject);
-		inventoryList = new Gson().fromJson(s, listOfTestObject);					
+				
+		List<InventoryItem> inventoryList = jsonToInvList(inventoryItems); 					
 			
 		return inventoryList;
 	}
@@ -66,18 +84,61 @@ public class InventoryListDAO {
 		List<InventoryItem> inventoryList = getInventoryList();
 		for(InventoryItem item : inventoryList){
 			if(item.getName().equals(name)){
-				int newQuantity = item.getInventoryQuantity() + adjustmentAmount;	
-				item.setInventoryQuantity(newQuantity);	
+				if((item.getInventoryQuantity()+adjustmentAmount) >= 0){
+					int newQuantity = item.getInventoryQuantity() + adjustmentAmount;	
+					item.setInventoryQuantity(newQuantity);	
+				}
 			}
 		}		
 		JSONObject jsonObject = openFile();
-		
-		Gson gson = new Gson();
-		JsonElement element = gson.toJsonTree(inventoryList, new TypeToken<List<InventoryItem>>() {}.getType());
-		JsonArray jsonArray = element.getAsJsonArray();	
+	
+		JsonArray jsonArray = invListToJson(inventoryList);
 		jsonObject.replace("inventoryItems",  jsonArray);
-		writeToFile(jsonObject);
-		
+		writeToFile(jsonObject);		
 	}
+	
+	public void addItem(String itemName, int quantity, double price, 
+		String supplier, double taxRate, int threshold){
+		List<InventoryItem> inventoryList = getInventoryList();
+		InventoryItem newItem = new InventoryItem(itemName,quantity,price,supplier,taxRate,threshold);
+		boolean itemExists = false;
+		
+		//Check if the item is already in inventory
+		for(InventoryItem item : inventoryList){
+			if(item.getName().equals(newItem.getName())){
+				itemExists = true;
+			}
+		}
+		
+		//Only add if the item does not already exist
+		if(!itemExists){
+			inventoryList.add(newItem);	
+			JSONObject jsonObject = openFile();			
+			JsonArray jsonArray = invListToJson(inventoryList);
+			jsonObject.replace("inventoryItems", jsonArray);
+			writeToFile(jsonObject);
+		}
+	}
+	
+	public void deleteItem(String name){
+		List<InventoryItem> inventoryList = getInventoryList();
+		InventoryItem itemToRemove = new InventoryItem();
+		boolean itemFound = false;
+		
+		for(InventoryItem item : inventoryList){
+			if(item.getName().equals(name)){
+				itemToRemove = item;
+				itemFound = true;
+			}
+		}
+		if(itemFound){
+			inventoryList.remove(itemToRemove);
+			JSONObject jsonObject = openFile();			
+			JsonArray jsonArray = invListToJson(inventoryList);
+			jsonObject.replace("inventoryItems", jsonArray);
+			writeToFile(jsonObject);
+		}
+	}
+
 	
 }

@@ -1,1 +1,1 @@
-{"inventoryItems":[{"name":"bread","inventoryQuantity":40,"price":5.0,"supplier":"Breadico","taxRate":0.0,"threshold":10},{"name":"cheese","inventoryQuantity":100,"price":2.5,"supplier":"St. Paul Cheese Shop","taxRate":0.0,"threshold":5}]}
+{"inventoryItems":[{"name":"bread","inventoryQuantity":180,"price":5.0,"supplier":"breadico","taxRate":0.0,"threshold":10},{"name":"cheese","inventoryQuantity":100,"price":2.5,"supplier":"st. paul cheese shop","taxRate":0.0,"threshold":5}]}

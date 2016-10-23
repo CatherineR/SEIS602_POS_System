@@ -1,15 +1,18 @@
 
 public class Inventory {
-	public void deleteInventoryItem(){
-		System.out.println("to be impletemented");
+	public void deleteInventoryItem(String name){
+		InventoryListDAO invListDAO = new InventoryListDAO();
+		invListDAO.deleteItem(name.toLowerCase());
 	}
 	
 	public void createInventoryItem(String itemName, int quantity, double price, String supplier, double taxRate, int threshold){
-		System.out.println("to be impletemented");
+		InventoryListDAO invListDAO = new InventoryListDAO();
+		invListDAO.addItem(itemName.toLowerCase(), quantity, price, supplier.toLowerCase(), taxRate, threshold);
 	}
 	
 	public void updateInventoryQuantity(String itemName, int quantity){
-		System.out.println("to be impletemented");
+		InventoryListDAO invListDAO = new InventoryListDAO();
+		invListDAO.adjustItemQuantity(itemName.toLowerCase(), quantity);		
 	}
 
 }
