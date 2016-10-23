@@ -10,12 +10,12 @@ public class SalesOrder {
 	private SalesOrderItem item;
 	private int numItem;
 	
-	public double getTotal(){
-		return this.totalPrice;
-	}
+	
 	 
 	public void SalesOrderItem(SalesOrderItem item){
 			setItem(item);
+			//public void incermentNum(){
+			//	setNumItem(+1);
 			//setItem(item);
 		     setNumItem(1);
 		}
@@ -26,19 +26,17 @@ public class SalesOrder {
 			return this.item;
 		}
 		
-		public String getItemID(){
-			return (getItem().getItemID());
-		}
+		
 		public void setSaleorderID(){
 			this.salesOrderID=salesOrderID;
 		}
+		
 		public UUID getSaleorderID(){
 			return salesOrderID;
 		}
 		public String getname(){
 			return (getItem().getname());
 		}
-		
 		
 		public double getprice(){
 			return (getItem().getprice());
@@ -49,12 +47,13 @@ public class SalesOrder {
 		public int getNumItem(){
 			return this.numItem;
 		}
-		public double getTotalCprice(){
+		public double setTotalCprice(){
 			return totalPrice=((item.getprice()*(1+item.gettaxRate())*getNumItem()));
 		}
-		//public void incermentNum(){
-		//	setNumItem(+1);
-		//}
+		public double getTotal(){
+			return this.totalPrice;
+		}
+	
 		public List<SalesOrderItem> getItemList() {
 			return itemList;
 		}
