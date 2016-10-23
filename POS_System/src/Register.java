@@ -1,50 +1,45 @@
 import java.util.UUID;
+import java.io.File;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Register {
-	private final int allowedAttempts = 3;
+	private final String EmployeeFile = "/Users/olaniaga/Documents/POS_DB/EmployeeFile.txt";
 	private int registerID;
 	private UUID registerSession;
 	private String userName;
+	private String userRole;
 	private boolean isLoggedIn;
 	private Date sessionStartTime;
 	private Date sessionEndTime;
 	private Scanner scan;
-	private int loginAttempts = 1;
 	
-	public void login(){
-		this.scan = new Scanner(System.in);
+	public void login(String userName, String password){
 		System.out.println("Please insert user name followed by password");
-		String userName = scan.next();
-		String password = scan.next();
-		String employeeRole = "NA";
+		String employeeRole = "1. not available";
 		if(!isLoggedIn){
-		Employee currnetEmployee = new Employee(userName, password);
-		employeeRole = currnetEmployee.login(userName, password);
+			
+			employeeRole=checkEmployeeCredential(userName, password);
+			
+			if(employeeRole.toLowerCase().equals("manager") 
+					|| employeeRole.toLowerCase().equals("cashier")){
+				this.userName = userName;
+				this.userRole = employeeRole;
+				this.isLoggedIn = true;
+				this.sessionStartTime = new Date();
+				System.out.println("Welcome to POS system,"+ this.userName + "!\n"+
+									"You have been logged in as: " + employeeRole
+									+"\nLogin time: " + this.sessionStartTime);
+				
+			}
+			else
+			{
+				System.out.println("Access Denied.");
+			}
+			
+			}
 		
 		}
-		if (employeeRole.toLowerCase().equals("manager") || employeeRole.toLowerCase().equals("cashier")){
-			this.isLoggedIn = true;
-			this.userName = userName;
-			this.loginAttempts++;
-			this.sessionStartTime = new Date();
-			System.out.println("Welcome to POS system,"+ this.userName + "!\n"+
-								"You have been logged in as: " + employeeRole
-								+"\nLog in time: " + this.sessionStartTime);
-			
-		}
-		else if(this.loginAttempts<this.allowedAttempts)
-		{
-			System.out.println("Access Denied. You only have total of "+ this.allowedAttempts+" tries. Please try again. You have used " + loginAttempts + " tiers so far.");
-			this.loginAttempts++;
-			this.login();
-		}else
-		{
-			System.out.println("Access Denied. You have exahusted all "+ this.allowedAttempts+" chances. Please talk to your manager.");
-		}
-		scan.close();
-	}
 	
 	public void logout(){
 		this.sessionEndTime = new Date();
@@ -53,6 +48,31 @@ public class Register {
 		this.userName = null;
 	}
 	
+	
+	//checks the employee credentials returns the role of the employee.
+	public String checkEmployeeCredential(String userName, String password){
+		openEmployeeFile();
+		String employeeRole = "2. not available";
+		
+		while (scan.hasNext()) {
+			String fileUserName = scan.next();
+			String filePassword = scan.next();
+			String fileRole = scan.next();
+			
+			//System.out.println(fileUserName + " " + filePassword + " " +fileRole);
+			
+			if (fileUserName.toLowerCase().concat(filePassword).equals(userName.toLowerCase().concat(password))){
+				employeeRole = fileRole;
+				//System.out.println(fileUserName + " " + filePassword + " " +fileRole);
+				break;
+			}
+			
+		}
+		closeEmployeeFile();
+		return employeeRole;
+	}
+	
+
 	public void beginTransaction(){
 		System.out.println("to be implemented");
 	}
@@ -85,4 +105,54 @@ public class Register {
 	public void receivePayment(double payment){
 		System.out.println("to be implemented");
 	}
+	//open the employee file.
+	
+	public void openEmployeeFile(){
+		try{
+			scan = new Scanner(new File(this.EmployeeFile));
+		}
+		catch (Exception e){
+			System.out.println("could not find file");
+		}
+	}
+	
+	
+	//close the employee file.
+	public void closeEmployeeFile(){
+		scan.close();
+	}
+
+	public boolean getIsLoggedIn(){
+		return this.isLoggedIn;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public int getRegisterID() {
+		return registerID;
+	}
+
+	public UUID getRegisterSession() {
+		return registerSession;
+	}
+
+	public Date getSessionEndTime() {
+		return sessionEndTime;
+	}
+	
+	
 }
