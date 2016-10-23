@@ -7,7 +7,7 @@ public class SalesOrderItem {
 	private String itemID;
 	
 
-public void SalesOrderItem(int orderQuantity,String name,double itemPrice,double taxRate){
+public SalesOrderItem(int orderQuantity,String name,double itemPrice,double taxRate){
 	   this.name=name;
 	   this.itemPrice=itemPrice;
 	   this.taxRate=taxRate;
