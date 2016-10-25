@@ -56,12 +56,12 @@ public class SalesOrder {
 		}
 	
 		public void setItemList(List<SalesOrderItem> itemList) {
+					
 			this.itemList = itemList;
 		}
 		public List<SalesOrderItem> getItemList() {
 			return itemList;
 		}
-		
 		
 		public void cancelOrder(){
 			setNumItem(0);
