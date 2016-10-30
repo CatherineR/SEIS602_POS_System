@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class Inventory {
 	public void deleteInventoryItem(String name){
@@ -13,6 +14,10 @@ public class Inventory {
 	public void updateInventoryQuantity(String itemName, int quantity){
 		InventoryListDAO invListDAO = new InventoryListDAO();
 		invListDAO.adjustItemQuantity(itemName.toLowerCase(), quantity);		
+	}
+	public List<InventoryItem> getInventoryList(){
+		InventoryListDAO invListDAO = new InventoryListDAO();
+		return invListDAO.getInventoryList();
 	}
 
 }
