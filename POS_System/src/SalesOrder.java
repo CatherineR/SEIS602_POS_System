@@ -76,6 +76,13 @@ public class SalesOrder {
 	public void showReceipt(){
 		for(int i =0; i<itemList.size(); i++){
 			System.out.println((i+1)+"\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getprice());
+		
+		}
+	}
+	public void commitSalesOrder(){
+		for(int i =0; i<itemList.size(); i++){
+			//System.out.println((i+1)+"\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getprice());
+			updateInventoryQuantity(itemList.get(i).getname(), itemList.get(i).getorderQuantity());
 		}
 	}
 }
