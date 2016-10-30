@@ -13,6 +13,7 @@ public class Register {
 	private Date sessionStartTime;
 	private Date sessionEndTime;
 	private Scanner scan;
+	private SalesOrder receipt;
 	
 	public void login(String userName, String password){
 		System.out.println("Please insert user name followed by password");
@@ -72,17 +73,22 @@ public class Register {
 		return employeeRole;
 	}
 	
-
-	public void beginTransaction(){
-		System.out.println("to be implemented");
+	public boolean hasTransaction(){
+		return (receipt != null);
 	}
 	
+	public UUID beginTransaction(){
+		if (hasTransaction() == false) {
+			receipt = new SalesOrder();	
+		}
+		return registerSession;
+	}
 	public void cancelTransaction(){
-		System.out.println("to be implemented");
+		receipt = null;
 	}
 	
 	public void commitTransaction(){
-		System.out.println("to be implemented");
+		 receipt.commitSalesOrder();
 	}
 	
 	public void addItem(String name, int quantity){
