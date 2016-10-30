@@ -18,7 +18,7 @@ public class Manager extends Cashier {
 		Inventory inv = new Inventory();	
 		inv.deleteInventoryItem(oldInventoryItemName);
 	}
-	public void createOrder(){
+	public void createOrders(){
 		Inventory inv = new Inventory();
 		List<InventoryItem> invList = inv.getInventoryList();
 		for(int i=0; i<invList.size(); i++){

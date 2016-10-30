@@ -7,7 +7,7 @@ public class ManagerTests {
 	@Test
 	public void test() {
 		Manager m = new Manager();
-		m.createOrder();
+		m.createOrders();
 	}
 
 }
