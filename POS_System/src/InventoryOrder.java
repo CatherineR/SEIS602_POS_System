@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.UUID;
 
-public class InventotyOrder {
+public class InventoryOrder {
 	private UUID orderId;
 	private Date orderDate;
 	private String supplierName;
