@@ -24,22 +24,25 @@ public class SalesOrderTest {
 		assertEquals(1.0,s1.getprice(),0);
 		assertEquals(0.1,s1.gettaxRate(),0);
 		
-		SalesOrder ss=new SalesOrder(s1);
-		assertEquals(1,ss.getQuantity());
-		assertEquals("name",ss.getname(),"name");
-		assertEquals(1.0,ss.getprice(),0);
-		assertEquals(0.1,ss.gettaxRate(),0);
-		List<SalesOrderItem> itemlist=new ArrayList<SalesOrderItem>();
-				itemlist.add(s1);
-				itemlist.add(s2);
-		String a=itemlist.get(0).getItemID();
-	    String b=itemlist.get(1).getname();
-	    for(int i=0;i<itemlist.size();i++)
-	    {
-	    System.out.println("ITEM ID:"+" "+itemlist.get(i).getItemID()+"\t"+"QUANTITY:"+" "+itemlist.get(i).getorderQuantity()+"\t"+
-	    		"ITEM NAME:"+" "+itemlist.get(i).getname()+"\t"+"ITEM PRICE:"+" "+itemlist.get(i).getprice()+"\t"+"ITEM TAX:"+" "+itemlist.get(i).gettaxRate());
-	    }
+		SalesOrder receipt=new SalesOrder();
+		//assertEquals(1,receipt.getQuantity());
+		//assertEquals("name",receipt.getname(),"name");
+		//assertEquals(1.0,receipt.getprice(),0);
+		//assertEquals(0.1,receipt.gettaxRate(),0);
+		//List<SalesOrderItem> itemlist=new ArrayList<SalesOrderItem>();
+				receipt.addItemList(s1);
+				receipt.addItemList(s2);
+				receipt.removeItemList(s1);
+		//String a=receipt.get(0).getItemID();
+	    //String b=receipt.get(1).getname();
+	    //for(int i=0;i<receipt.size();i++)
+	    //{
+	    //System.out.println("ITEM ID:"+" "+receipt.get(i).getItemID()+"\t"+"QUANTITY:"+" "+itemlist.get(i).getorderQuantity()+"\t"+
+	    //	"ITEM NAME:"+" "+itemlist.get(i).getname()+"\t"+"ITEM PRICE:"+" "+itemlist.get(i).getprice()+"\t"+"ITEM TAX:"+" "+itemlist.get(i).gettaxRate());
+	   // }
+	    System.out.println(receipt.getTotalprice());
 	    
+	    receipt.showReceipt();
 	}
 }
 
