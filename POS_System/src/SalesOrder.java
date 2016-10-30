@@ -18,7 +18,7 @@ public class SalesOrder {
 		itemList = new ArrayList<SalesOrderItem>();
 	}
 	
-	public SalesOrderItem getItem(){
+	public SalesOrderItem setItem(SalesOrderItem item){
 		return this.item;
 	}
 	
@@ -36,35 +36,42 @@ public class SalesOrder {
 		return this.numItem;
 	}
 	public int getQuantity(){
-		return (getItem().getorderQuantity());
+		return (item.getorderQuantity());
 	}
 	
 	public String getname(){
-		return (getItem().getname());
+		return (item.getname());
 	}
 	
 	public double getprice(){
-		return (getItem().getprice());
+		return (item.getprice());
 	}
 	public double gettaxRate(){
-		return(getItem().gettaxRate());
+		return(item.gettaxRate());
 	}
 	public double setTotalCprice(){
-		return totalPrice=((item.getprice()*(1+item.gettaxRate())*getNumItem()));
+		return totalPrice=((item.getprice()*(1+item.gettaxRate())));
 	}
 	public double getTotalprice(){
 		return this.totalPrice;
 	}
 
-	public void setItemList(List<SalesOrderItem> itemList) {
+	public void getItemList(List<SalesOrderItem> itemList) {
 				
 		this.itemList = itemList;
 	}
-	public List<SalesOrderItem> getItemList() {
-		return itemList;
+	public void addItemList(SalesOrderItem item) {
+		itemList.add(item);
+		totalPrice += item.getprice();
 	}
 	
 	public void cancelOrder(){
 		setNumItem(0);
+	}
+	
+	public void showReceipt(){
+		for(int i =0; i<itemList.size(); i++){
+			System.out.println((i+1)+"\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getprice());
+		}
 	}
 }
