@@ -64,6 +64,10 @@ public class SalesOrder {
 		itemList.add(item);
 		totalPrice += item.getprice();
 	}
+	public void removeItemList(SalesOrderItem item) {
+		itemList.remove(item);
+		totalPrice -= item.getprice();
+	}
 	
 	public void cancelOrder(){
 		setNumItem(0);
