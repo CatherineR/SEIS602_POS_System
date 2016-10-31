@@ -22,9 +22,18 @@ public class InventoryListDAOTests {
 	@Test	
 	public void testDeleteInventoryItem() {
 		InventoryListDAO invListDAO = new InventoryListDAO();		
-		invListDAO.deleteItem("milk");
-			
+		invListDAO.deleteItem("milk");			
 	}
 	
+	@Test(expected=ItemNotFound.class)	
+	public void testFindInventoryItemNoneExist(){
+		InventoryListDAO invListDAO = new InventoryListDAO();		
+		invListDAO.findInventoryItem("shoe");			
+	}
 	
+	@Test()	
+	public void testFindInventoryItemDoesExist(){
+		InventoryListDAO invListDAO = new InventoryListDAO();		
+		invListDAO.findInventoryItem("milk");			
+	}
 }

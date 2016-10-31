@@ -1,13 +1,16 @@
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.Test;
 
 public class InventoryOrderTests {
 
-	/*@Test
+	@Test
 	public void testIncrement() {
 		InventoryOrderDAO invOrderDAO= new InventoryOrderDAO();		
-		invOrderDAO.addOrder("Frito Lays", "chips", 20, 2.50);		
-	}*/
+		Date currentDate = new Date();
+		invOrderDAO.addOrder("Orange Juice", "Doles", 20, 2.50, currentDate);		
+	}
 
 }

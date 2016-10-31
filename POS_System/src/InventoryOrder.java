@@ -21,7 +21,7 @@ public class InventoryOrder {
 	}
 	
 	public InventoryOrder(String sName,String iName,int oQuantity, 
-			double iPrice){
+			double iPrice, Date oDate){
 		orderId = UUID.randomUUID();
 		
 		supplierName = sName;
@@ -30,26 +30,25 @@ public class InventoryOrder {
 		itemPrice = iPrice;
 		fulfillmentDate = null;	
 		status = "new";
-
+		orderDate = oDate;
 	    itemPrice = iPrice;
 	    subTotalPrice = iPrice * oQuantity;
 	    
-	    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-	    Date today = new Date();
-	    try {
-			orderDate = formatter.parse(formatter.format(today));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    
 	}
 	
-	public void createOrder(String sName,String iName,int oQuantity, 
-			double iPrice){
+	public UUID createOrder(String sName,String iName,int oQuantity, 
+										double iPrice, Date orderDate)
+	{
 		InventoryOrderDAO invOrderDAO = new InventoryOrderDAO();
-		invOrderDAO.addOrder(sName, iName, oQuantity, iPrice);
+		UUID orderId = invOrderDAO.addOrder(sName, iName, oQuantity, iPrice, orderDate);
+		
+		//TODO - update Supplier file with lastOrderDate = orderDate
+		return orderId;
 	}
-	
+	public UUID getOrderId(){
+		return orderId;
+	}
 
 	
 }

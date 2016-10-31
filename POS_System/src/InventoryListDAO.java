@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-
 public class InventoryListDAO {
 	
 	private final String inventoryFile = "./././res/InventoryList.json";
@@ -122,21 +121,34 @@ public class InventoryListDAO {
 	
 	public void deleteItem(String name){
 		List<InventoryItem> inventoryList = getInventoryList();
-		InventoryItem itemToRemove = new InventoryItem();
+		InventoryItem itemToRemove = findInventoryItem(name);
+		
+		inventoryList.remove(itemToRemove);
+		JSONObject jsonObject = openFile();			
+		JsonArray jsonArray = invListToJson(inventoryList);
+		jsonObject.replace("inventoryItems", jsonArray);
+		writeToFile(jsonObject);
+		
+	}
+	
+	public InventoryItem findInventoryItem(String name) throws ItemNotFound{
+		List<InventoryItem> inventoryList = getInventoryList();
+		InventoryItem itemToReturn = new InventoryItem();
 		boolean itemFound = false;
 		
+		//loop through inventory to find item
 		for(InventoryItem item : inventoryList){
 			if(item.getName().equals(name)){
-				itemToRemove = item;
+				itemToReturn = item;
 				itemFound = true;
 			}
 		}
 		if(itemFound){
-			inventoryList.remove(itemToRemove);
-			JSONObject jsonObject = openFile();			
-			JsonArray jsonArray = invListToJson(inventoryList);
-			jsonObject.replace("inventoryItems", jsonArray);
-			writeToFile(jsonObject);
+			return itemToReturn;
+		}
+		else{
+			ItemNotFound e = new ItemNotFound("Item " + name + " does not exist in inventory");
+			throw e;
 		}
 	}
 

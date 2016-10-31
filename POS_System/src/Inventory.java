@@ -19,5 +19,9 @@ public class Inventory {
 		InventoryListDAO invListDAO = new InventoryListDAO();
 		return invListDAO.getInventoryList();
 	}
+	public InventoryItem getInventoryItem(String itemName){
+		InventoryListDAO invListDAO = new InventoryListDAO();
+		return invListDAO.findInventoryItem(itemName);
+	}
 
 }

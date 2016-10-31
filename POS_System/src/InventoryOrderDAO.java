@@ -4,7 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -80,12 +82,11 @@ public class InventoryOrderDAO {
 		return inventoryOrder;
 	}
 	
-	public void addOrder(String sName,String iName,int oQuantity, 
-			double iPrice){
+	public UUID addOrder(String sName, String iName, int oQuantity, double iPrice, Date oDate){
 		List<InventoryOrder> inventoryOrder = getInventoryOrder();
 		InventoryOrder newOrder = new InventoryOrder( sName.toLowerCase(), iName.toLowerCase(), oQuantity, 
-				 iPrice);
-		
+				 iPrice, oDate);
+		UUID newOrderId = newOrder.getOrderId();
 		
 		inventoryOrder.add(newOrder);	
 		JSONObject jsonObject = openFile();			
@@ -93,5 +94,6 @@ public class InventoryOrderDAO {
 		jsonObject.replace("inventoryOrders", jsonArray);
 		writeToFile(jsonObject);
 	
+		return newOrderId;
 	}
 }
