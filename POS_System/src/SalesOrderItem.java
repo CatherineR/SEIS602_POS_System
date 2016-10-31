@@ -13,7 +13,7 @@ public SalesOrderItem(int orderQuantity,String name,double itemPrice,double taxR
 	   this.taxRate=taxRate;
 	   this.orderQuantity=orderQuantity;
 }
-public String setItemID(String itemId){
+public String setItemID(String itemID){
 	   return this.itemID = itemID;
 }
 public String getItemID(){
