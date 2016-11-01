@@ -82,6 +82,40 @@ public class InventoryOrderDAO {
 		return inventoryOrder;
 	}
 	
+
+	public List<InventoryOrder> getOutstandingOrders() {				
+		JSONObject jsonObject = openFile();
+		JSONArray inventoryOrders = (JSONArray) jsonObject.get("inventoryOrders");
+		List<InventoryOrder> outstandingOrders = new ArrayList<InventoryOrder>();
+		
+		List<InventoryOrder> inventoryOrder = jsonToInvOrder(inventoryOrders); 					
+		//loop through Orders to find item outstanding orders
+		for(InventoryOrder order : inventoryOrder){
+			if(!(order.getStatus().equals("fulfilled"))){
+				outstandingOrders.add(order);
+			}
+		}
+		return outstandingOrders;
+	}
+	
+	public void markFulfilled(UUID orderID, String status) {
+		List<InventoryOrder> inventoryOrder = getInventoryOrder();
+		
+		for(InventoryOrder order : inventoryOrder){
+			if(order.getOrderId().equals(orderID)){									
+					order.setStatus(status);	
+					Date currentDate = new Date();
+					order.setFulfillmentDate(currentDate);
+				}
+			}
+		
+		JSONObject jsonObject = openFile();			
+		JsonArray jsonArray = invOrderToJson(inventoryOrder);
+		jsonObject.replace("inventoryOrders", jsonArray);
+		writeToFile(jsonObject);
+	
+	}
+	
 	public UUID addOrder(String sName, String iName, int oQuantity, double iPrice, Date oDate){
 		List<InventoryOrder> inventoryOrder = getInventoryOrder();
 		InventoryOrder newOrder = new InventoryOrder( sName.toLowerCase(), iName.toLowerCase(), oQuantity, 
@@ -96,4 +130,6 @@ public class InventoryOrderDAO {
 	
 		return newOrderId;
 	}
+
+
 }

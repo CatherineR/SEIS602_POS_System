@@ -9,5 +9,10 @@ public class ManagerTests {
 		Manager m = new Manager();
 		m.createOrders();
 	}
+	@Test
+	public void testfulfillOrders() {
+		Manager m = new Manager();
+		m.fullfillInventoryOrder();
+	}
 
 }

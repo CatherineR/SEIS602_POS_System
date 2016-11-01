@@ -12,5 +12,12 @@ public class InventoryOrderTests {
 		Date currentDate = new Date();
 		invOrderDAO.addOrder("Orange Juice", "Doles", 20, 2.50, currentDate);		
 	}
+	
+	@Test
+	public void testGetOutstandingOrders() {
+		InventoryOrderDAO invOrderDAO= new InventoryOrderDAO();		
+			
+		System.out.println(invOrderDAO.getOutstandingOrders());
+	}
 
 }

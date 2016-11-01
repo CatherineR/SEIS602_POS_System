@@ -41,7 +41,24 @@ public class Manager extends Cashier {
 	}
 	
 	public void fullfillInventoryOrder(){
-		System.out.println("incomplete method");
+		DeliveredItemsDAO delItemsDAO  = new DeliveredItemsDAO();
+		List<DeliveredItem> delList = delItemsDAO.getDelList();
+		
+		InventoryOrderDAO invOrdersDAO = new InventoryOrderDAO();
+		List<InventoryOrder> outstandingOrders = invOrdersDAO.getOutstandingOrders();
+		
+		for(InventoryOrder order : outstandingOrders){
+			UUID orderID = order.getOrderId();	
+			for(DeliveredItem del : delList){
+				if(del.getOrderID().equals(orderID)){
+					invOrdersDAO.markFulfilled(orderID, "fulfilled");
+					System.out.println("The order for "+order.getItemName() + " from supplier "+ order.getSupplierName());
+					System.out.println("with Order ID " + order.getOrderId() + " has been fulfilled.");
+				}
+			}
+		}
+		
+		
 	}
 	
 	private Date getCurrentDate(){

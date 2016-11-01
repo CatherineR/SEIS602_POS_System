@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,18 +38,42 @@ public class InventoryOrder {
 	    
 	}
 	
-	public UUID createOrder(String sName,String iName,int oQuantity, 
+	public UUID createOrder (String sName,String iName,int oQuantity, 
 										double iPrice, Date orderDate)
 	{
 		InventoryOrderDAO invOrderDAO = new InventoryOrderDAO();
 		UUID orderId = invOrderDAO.addOrder(sName, iName, oQuantity, iPrice, orderDate);
 		
-		//TODO - update Supplier file with lastOrderDate = orderDate
+		//update supplier's last order date 
+		SupplierFileDAO supplier;
+		try {
+			supplier = new SupplierFileDAO();
+			supplier.updateLastOrderDate(sName, orderDate);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
 		return orderId;
 	}
 	public UUID getOrderId(){
 		return orderId;
 	}
-
 	
+	public String getStatus(){
+		return status;
+	}
+	public void setStatus(String newStatus){
+		status = newStatus;
+	}
+	public void setFulfillmentDate(Date newDate){
+		fulfillmentDate = newDate;
+	}
+	
+	public String getItemName(){
+		return itemName;
+	}
+	public String getSupplierName(){
+		return supplierName;
+	}
 }
