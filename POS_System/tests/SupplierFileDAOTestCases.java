@@ -8,13 +8,39 @@ import org.junit.Test;
 public class SupplierFileDAOTestCases {
 
 	@Test
-	public void test() throws IOException {
+	public void testDeleteSupplier() throws IOException {
+		System.out.println("testDeleteSupplier: ");
+		SupplierFileDAO supplierDAO = new SupplierFileDAO();
+		supplierDAO.deleteSupplier("Supplier21");
+		supplierDAO.commitUpdate();
+		System.out.println();
+	}
+	
+	@Test
+	public void testAddSupplier() throws IOException {
+		System.out.println("testAddSupplier: ");
+		SupplierFileDAO supplierDAO3 = new SupplierFileDAO();
+		supplierDAO3.addSupplier("Olani", new Date(),new Date(), "updated phone1", "updated address1");
+		supplierDAO3.commitUpdate();
+		System.out.println();
+	}
 
-		SupplierFileDAO sfdao = new SupplierFileDAO(new Supplier("Suplier2", new Date(), new Date(), "address 2", "phone number 2"));
-		
-		sfdao.addToSupplierFile();
-		
-		//fail("Not yet implemented");
+	@Test
+	public void testupdateLastOrderDate() throws IOException {
+		System.out.println("testupdateLastOrderDate: ");
+		SupplierFileDAO supplierDAO2 = new SupplierFileDAO();
+		supplierDAO2.updateLastOrderDate("Suplier221221", new Date());
+		supplierDAO2.commitUpdate();
+		System.out.println();
+	}
+	
+	@Test
+	public void testupdateSupplier() throws IOException {
+		System.out.println("testupdateSupplier: ");
+		SupplierFileDAO supplierDAO3 = new SupplierFileDAO();
+		supplierDAO3.updateSupplier("Messing around", "Olani", new Date(),new Date(), "updated phone1", "updated address1");
+		supplierDAO3.commitUpdate();
+		System.out.println();
 	}
 
 }
