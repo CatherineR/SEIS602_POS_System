@@ -76,4 +76,7 @@ public class InventoryOrder {
 	public String getSupplierName(){
 		return supplierName;
 	}
+	public int getQuantity(){
+		return orderQuantity;
+	}
 }

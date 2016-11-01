@@ -86,6 +86,7 @@ public class InventoryListDAO {
 				if((item.getInventoryQuantity()+adjustmentAmount) >= 0){
 					int newQuantity = item.getInventoryQuantity() + adjustmentAmount;	
 					item.setInventoryQuantity(newQuantity);	
+					System.out.println(name + " has new quantity " + newQuantity);
 				}
 			}
 		}		
@@ -116,6 +117,10 @@ public class InventoryListDAO {
 			JsonArray jsonArray = invListToJson(inventoryList);
 			jsonObject.replace("inventoryItems", jsonArray);
 			writeToFile(jsonObject);
+			System.out.println(newItem.getName() + " has been added to inventory.");
+		}
+		else{
+			System.out.println(itemName + " already exists.");
 		}
 	}
 	

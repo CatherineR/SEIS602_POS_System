@@ -26,6 +26,7 @@ public class Manager extends Cashier {
 	public void createOrders(){
 		Inventory inv = new Inventory();
 		List<InventoryItem> invList = inv.getInventoryList();
+		boolean noNewOrders = true;
 		//Go through inventory items
 		for(int i=0; i<invList.size(); i++){
 			InventoryItem item = invList.get(i);
@@ -35,8 +36,12 @@ public class Manager extends Cashier {
 				InventoryOrder invOrder = new InventoryOrder();
 				Date orderDate = getCurrentDate();
 				UUID orderId = invOrder.createOrder(item.getSupplier(), item.getName(), 100, item.getPrice(), orderDate);
-				System.out.println("Added new order for item " + item.getName() + " with Order ID " + orderId +"\n");				
+				System.out.println("Added new order for item " + item.getName() + " with Order ID " + orderId +"\n");
+				noNewOrders = false;
 			}
+		}
+		if(noNewOrders){
+			System.out.println("Inventory quantity is good. No new orders creared.");
 		}
 	}
 	
@@ -46,16 +51,22 @@ public class Manager extends Cashier {
 		
 		InventoryOrderDAO invOrdersDAO = new InventoryOrderDAO();
 		List<InventoryOrder> outstandingOrders = invOrdersDAO.getOutstandingOrders();
-		
+		boolean noNewDeliveries = true;
 		for(InventoryOrder order : outstandingOrders){
 			UUID orderID = order.getOrderId();	
 			for(DeliveredItem del : delList){
 				if(del.getOrderID().equals(orderID)){
 					invOrdersDAO.markFulfilled(orderID, "fulfilled");
+					InventoryListDAO invListDAO = new InventoryListDAO();
+					invListDAO.adjustItemQuantity(order.getItemName(), order.getQuantity());
 					System.out.println("The order for "+order.getItemName() + " from supplier "+ order.getSupplierName());
 					System.out.println("with Order ID " + order.getOrderId() + " has been fulfilled.");
+					noNewDeliveries = false;
 				}
 			}
+		}
+		if(noNewDeliveries){
+			System.out.println("No new deliveries to fulfill outstanding orders");
 		}
 		
 		
