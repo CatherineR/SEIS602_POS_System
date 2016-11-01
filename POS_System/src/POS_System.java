@@ -9,45 +9,55 @@ public class POS_System {
 	    Scanner input = new Scanner(System.in);
 
 		System.out.println("Welcome to the Point-Of-Sale Registration System" + "\n");
-		while(!register1.getIsLoggedIn()){
-			System.out.print("Please enter your username: ");			
-			String userName = input.nextLine();
-			
-			System.out.print("Please enter your password: ");
-			String userPassword = input.nextLine();
-			
-			register1.login(userName, userPassword);
-		}		
-			String command;
-			if(register1.getUserRole().equals("manager")){
-				//Begin Manager menu				
-				do{
-					System.out.println("Type in '1' if you would like to start a Sales Order");
-					System.out.println("Type in '2' if you would like to update Inventory");
-					System.out.println("Type in '0' to log out");
-					command = input.nextLine();
-					if(command.equals("1")){
-						startSalesMenu();
-					}					
+		String inputText;
+		do{
+			System.out.println("Type in '1' to login");
+			System.out.println("Type in 'Quit' to exit");
+			inputText = input.nextLine();
+			if(inputText.equals("1")){
+				while(!register1.getIsLoggedIn()){
+					System.out.print("Please enter your username: ");			
+					String userName = input.nextLine();
 					
-					if(command.equals("2")){
-						startInventoryManagerMenu();
-					}
-				}while(!command.equals("0"));//end Manager menu
-										
+					System.out.print("Please enter your password: ");
+					String userPassword = input.nextLine();
+					
+					register1.login(userName, userPassword);
+				}
+			
+				String command;
+				if(register1.getUserRole().equals("manager")){
+					//Begin Manager menu				
+					do{
+						System.out.println("Type in '1' if you would like to start a Sales Order");
+						System.out.println("Type in '2' if you would like to update Inventory");
+						System.out.println("Type in '0' to log out");
+						command = input.nextLine();
+						if(command.equals("1")){
+							startSalesMenu();
+						}					
+						
+						if(command.equals("2")){
+							startInventoryManagerMenu();
+						}
+					}while(!command.equals("0"));//end Manager menu
+											
+				}
+				else{
+					//Begin Cashier
+					do{
+						System.out.println("Type in '1' if you would like to start a Sales Order");
+						System.out.println("Type in '0' to log out");
+						command = input.nextLine();
+						if(command.equals("1")){
+							startSalesMenu();
+						}					
+					}while(!command.equals("0"));//end Cashier menu
+				}
+				register1.logout();
 			}
-			else{
-				//Begin Cashier
-				do{
-					System.out.println("Type in '1' if you would like to start a Sales Order");
-					System.out.println("Type in '0' to log out");
-					command = input.nextLine();
-					if(command.equals("1")){
-						startSalesMenu();
-					}					
-				}while(!command.equals("0"));//end Cashier menu
-			}
-			register1.logout();
+		}while(!inputText.equals("Quit"));
+		System.out.println("Goodbye");
 	 
 	}
 	private static void startSalesMenu(){
