@@ -17,19 +17,17 @@ public class POS_System {
 			String userPassword = input.nextLine();
 			
 			register1.login(userName, userPassword);
-		}
-		
-			System.out.println(register1.getUserRole());
+		}		
+			String command;
 			if(register1.getUserRole().equals("manager")){
-				//Begin Manager menu
-				String command;
+				//Begin Manager menu				
 				do{
 					System.out.println("Type in '1' if you would like to start a Sales Order");
 					System.out.println("Type in '2' if you would like to update Inventory");
 					System.out.println("Type in '0' to log out");
 					command = input.nextLine();
 					if(command.equals("1")){
-						//Sales Order Commands go here
+						startSalesMenu();
 					}					
 					
 					if(command.equals("2")){
@@ -38,10 +36,23 @@ public class POS_System {
 				}while(!command.equals("0"));//end Manager menu
 										
 			}
+			else{
+				//Begin Cashier
+				do{
+					System.out.println("Type in '1' if you would like to start a Sales Order");
+					System.out.println("Type in '0' to log out");
+					command = input.nextLine();
+					if(command.equals("1")){
+						startSalesMenu();
+					}					
+				}while(!command.equals("0"));//end Cashier menu
+			}
 			register1.logout();
 	 
 	}
-	
+	private static void startSalesMenu(){
+		//TODO Sales Order Menu and commands go here
+	}
 	private static void startInventoryManagerMenu(){
 		Manager manager = new Manager();
 		String choice;
