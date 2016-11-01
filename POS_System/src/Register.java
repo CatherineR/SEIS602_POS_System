@@ -28,6 +28,7 @@ public class Register {
 				this.userRole = employeeRole;
 				this.isLoggedIn = true;
 				this.sessionStartTime = new Date();
+				this.registerSession = UUID.randomUUID();
 				System.out.println("Welcome to POS system,"+ this.userName + "!\n"+
 									"You have been logged in as: " + employeeRole
 									+"\nLogin time: " + this.sessionStartTime);
@@ -47,6 +48,7 @@ public class Register {
 		this.isLoggedIn = false;
 		System.out.println(this.userName + ": You have successfully logged out of the system.\nLogoff time: " + this.sessionEndTime);
 		this.userName = null;
+		this.registerSession = null;
 	}
 	
 	
