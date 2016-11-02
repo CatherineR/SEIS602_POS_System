@@ -1,17 +1,16 @@
 public class SalesOrderItem {
 	private String name;
-	private int orderQuantity;
+	private double orderQuantity;
 	private double itemPrice;
 	private double subTotal;
 	private double taxRate;
 	private String itemID;
 	
 
-public SalesOrderItem(int orderQuantity,String name,double itemPrice,double taxRate){
+public SalesOrderItem(double orderQuantity,String name){
 	   this.name=name;
-	   this.itemPrice=itemPrice;
-	   this.taxRate=taxRate;
 	   this.orderQuantity=orderQuantity;
+	   
 }
 public String setItemID(String itemID){
 	   return this.itemID = itemID;
@@ -19,20 +18,20 @@ public String setItemID(String itemID){
 public String getItemID(){
 	   return this.itemID;
 }
-public int getorderQuantity(){
+public double getorderQuantity(){
 	   return this.orderQuantity;
 }
 public String getname(){
 	   return this.name;
 }
 public double gettaxRate(){
-	   return this.taxRate;
+		Inventory inventory=new Inventory();
+		return inventory.getInventoryItem(name).getTaxRate();
 }
-public void setprice(double price){
-	   this.itemPrice=itemPrice;
-}
+
 public double getprice(){
-	   return this.itemPrice;
+	   Inventory inventory=new Inventory();
+	   return inventory.getInventoryItem(name).getPrice();
 }
 
 
