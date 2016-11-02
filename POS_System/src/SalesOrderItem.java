@@ -1,13 +1,13 @@
 public class SalesOrderItem {
 	private String name;
-	private double orderQuantity;
+	private int orderQuantity;
 	private double itemPrice;
 	private double subTotal;
 	private double taxRate;
 	private String itemID;
 	
 
-public SalesOrderItem(double orderQuantity,String name){
+public SalesOrderItem(String name,int orderQuantity){
 	   this.name=name;
 	   this.orderQuantity=orderQuantity;
 	   
@@ -18,7 +18,7 @@ public String setItemID(String itemID){
 public String getItemID(){
 	   return this.itemID;
 }
-public double getorderQuantity(){
+public int getorderQuantity(){
 	   return this.orderQuantity;
 }
 public String getname(){
