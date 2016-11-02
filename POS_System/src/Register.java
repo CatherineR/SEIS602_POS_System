@@ -94,11 +94,13 @@ public class Register {
 	}
 	
 	public void addItem(String name, int quantity){
-		System.out.println("to be implemented");
+		System.out.println("not tested yet.");
+		receipt.addItemList(new SalesOrderItem(name, quantity));
 	}
 	
-	public void removeItem(String name, int quantity){
-		System.out.println("to be implemented");
+	public void removeItem(String name){
+		System.out.println("Not tested, wenjing needs to support this in sales order class.");
+		receipt.removeItemList(name);
 	}
 	
 	public void returnSalesOrder(UUID salesOrderID){
@@ -106,8 +108,8 @@ public class Register {
 	}
 	
 	public double totalSale(){
-		System.out.println("to be implemented, returning 0.0 for now");
-		return 0.0;
+		System.out.println("not tested yet");
+		return receipt.getTotalprice();
 	}
 	
 	public void receivePayment(double payment){
