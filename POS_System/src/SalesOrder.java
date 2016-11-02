@@ -61,10 +61,19 @@ public class SalesOrder {
 		this.itemList = itemList;
 	}
 	public void addItemList(SalesOrderItem item) {
+		//inventory name needed
+		if(inventory.getInventoryItem(item.getname()).equals(item.getname()))
+			{
 		itemList.add(item);
 		totalPrice += item.getprice();
+		}
+		else
+		{
+			System.out.println("This item:"+item.getname()+"is out of stock");
+		}
 	}
 	public void removeItemList(SalesOrderItem item) {
+		
 		itemList.remove(item);
 		totalPrice -= item.getprice();
 	}
