@@ -65,6 +65,7 @@ public class SalesOrder {
 		if(inventory.getInventoryItem(item.getname()).equals(item.getname()))
 			{
 		itemList.add(item);
+		inventory.updateInventoryQuantity(item.getname(),item.getorderQuantity());
 		totalPrice += item.getprice();
 		}
 		else
