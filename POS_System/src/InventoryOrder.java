@@ -38,11 +38,11 @@ public class InventoryOrder {
 	    
 	}
 	
-	public UUID createOrder (String sName,String iName,int oQuantity, 
+	public UUID createOrder (String iName,String sName,int oQuantity, 
 										double iPrice, Date orderDate)
 	{
 		InventoryOrderDAO invOrderDAO = new InventoryOrderDAO();
-		UUID orderId = invOrderDAO.addOrder(sName, iName, oQuantity, iPrice, orderDate);
+		UUID orderId = invOrderDAO.addOrder( iName, sName, oQuantity, iPrice, orderDate);
 		
 		//update supplier's last order date 
 		SupplierFileDAO supplier;
@@ -50,7 +50,7 @@ public class InventoryOrder {
 			supplier = new SupplierFileDAO();
 			supplier.updateLastOrderDate(sName, orderDate);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}		
 		
@@ -69,7 +69,9 @@ public class InventoryOrder {
 	public void setFulfillmentDate(Date newDate){
 		fulfillmentDate = newDate;
 	}
-	
+	public Date getFulfillmentDate(){
+		return fulfillmentDate;
+	}
 	public String getItemName(){
 		return itemName;
 	}

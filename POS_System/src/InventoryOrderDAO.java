@@ -73,13 +73,27 @@ public class InventoryOrderDAO {
 		return jsonArray;
 	}
 	
-	public List<InventoryOrder> getInventoryOrder() {				
+	public List<InventoryOrder> getInventoryOrders() {				
 		JSONObject jsonObject = openFile();
 		JSONArray inventoryOrders = (JSONArray) jsonObject.get("inventoryOrders");
 				
 		List<InventoryOrder> inventoryOrder = jsonToInvOrder(inventoryOrders); 					
 			
 		return inventoryOrder;
+	}
+	
+	public InventoryOrder getInventoryOrder(UUID orderID) {				
+		JSONObject jsonObject = openFile();
+		JSONArray inventoryOrders = (JSONArray) jsonObject.get("inventoryOrders");
+				
+		List<InventoryOrder> inventoryOrder = jsonToInvOrder(inventoryOrders); 					
+		InventoryOrder returnOrder = new InventoryOrder();	
+		for(InventoryOrder order : inventoryOrder){
+			if((order.getOrderId().equals(orderID))){
+				returnOrder = order;
+			}
+		}
+		return returnOrder;
 	}
 	
 
@@ -99,7 +113,7 @@ public class InventoryOrderDAO {
 	}
 	
 	public void markFulfilled(UUID orderID, String status) {
-		List<InventoryOrder> inventoryOrder = getInventoryOrder();
+		List<InventoryOrder> inventoryOrder = getInventoryOrders();
 		
 		for(InventoryOrder order : inventoryOrder){
 			if(order.getOrderId().equals(orderID)){									
@@ -116,8 +130,8 @@ public class InventoryOrderDAO {
 	
 	}
 	
-	public UUID addOrder(String sName, String iName, int oQuantity, double iPrice, Date oDate){
-		List<InventoryOrder> inventoryOrder = getInventoryOrder();
+	public UUID addOrder( String iName, String sName, int oQuantity, double iPrice, Date oDate){
+		List<InventoryOrder> inventoryOrder = getInventoryOrders();
 		InventoryOrder newOrder = new InventoryOrder( sName.toLowerCase(), iName.toLowerCase(), oQuantity, 
 				 iPrice, oDate);
 		UUID newOrderId = newOrder.getOrderId();

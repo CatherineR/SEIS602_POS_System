@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 import org.junit.Test;
 
 public class InventoryListDAOTests {
@@ -31,9 +34,21 @@ public class InventoryListDAOTests {
 		invListDAO.findInventoryItem("shoe");			
 	}
 	
-	@Test()	
+	@Test
 	public void testFindInventoryItemDoesExist(){
 		InventoryListDAO invListDAO = new InventoryListDAO();		
 		invListDAO.findInventoryItem("milk");			
+	}
+	
+	@Test
+	public void testGetInventoryList(){
+		InventoryListDAO invListDAO = new InventoryListDAO();		
+		List<InventoryItem> orders = invListDAO.getInventoryList();	
+		int count = 0;
+		for(int i=0;i<orders.size();i++){
+			count++;
+		}
+		assertEquals(orders.size(),count);
+		
 	}
 }

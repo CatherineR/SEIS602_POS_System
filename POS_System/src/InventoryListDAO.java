@@ -126,9 +126,9 @@ public class InventoryListDAO {
 	
 	public void deleteItem(String name){
 		List<InventoryItem> inventoryList = getInventoryList();
-		InventoryItem itemToRemove = findInventoryItem(name);
+		int itemIndexToRemove = findInventoryItemInt(name);
 		
-		inventoryList.remove(itemToRemove);
+		inventoryList.remove(itemIndexToRemove);
 		JSONObject jsonObject = openFile();			
 		JsonArray jsonArray = invListToJson(inventoryList);
 		jsonObject.replace("inventoryItems", jsonArray);
@@ -156,6 +156,27 @@ public class InventoryListDAO {
 			throw e;
 		}
 	}
-
+	public int findInventoryItemInt(String name) throws ItemNotFound{
+		List<InventoryItem> inventoryList = getInventoryList();
+		boolean itemFound = false;
+		
+		int returnCount = 0;
+		int count = 0;
+		//loop through inventory to find item
+		for(InventoryItem item : inventoryList){
+			count++;
+			if(item.getName().equals(name)){
+				returnCount=count-1;
+				itemFound = true;
+			}
+		}
+		if(itemFound){
+			return returnCount;
+		}
+		else{
+			ItemNotFound e = new ItemNotFound("Item " + name + " does not exist in inventory");
+			throw e;
+		}
+	}
 	
 }
