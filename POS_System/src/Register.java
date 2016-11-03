@@ -105,8 +105,10 @@ public class Register {
 		}
 		return registerSession;
 	}
-	public void cancelTransaction(){
+	
+	public SalesOrder cancelTransaction(){
 		receipt = null;
+		return receipt;
 	}
 	
 	public void commitTransaction(){
