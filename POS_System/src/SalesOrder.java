@@ -58,13 +58,9 @@ public class SalesOrder {
 		this.itemList = itemList;
 	}
 	public void addItemList(SalesOrderItem item) {
-<<<<<<< Updated upstream
-		
 		itemList.add(item);
-		//inventory.updateInventoryQuantity(item.getname(),item.getorderQuantity());
-		totalPrice += item.getprice();
-		
-		
+		totalPrice = totalPrice + item.getSubTotal();
+		numItem = numItem + item.getorderQuantity(); 
 	}
 	public void removeItemList(String name) {
 		
@@ -72,20 +68,14 @@ public class SalesOrder {
 		{if(item.getname().equals(name))
 			{
 			itemList.remove(item);
-			totalPrice -= item.getprice();
+			totalPrice -= item.getSubTotal();
 			}
 		}
-=======
-		itemList.add(item);
-		totalPrice = totalPrice + item.getSubTotal();
-		numItem = numItem + item.getorderQuantity(); 
-			
+	
 	}
 	public void removeItemList(int itemNumber) {
-		
 		totalPrice -= itemList.get(itemNumber).getSubTotal();
 		itemList.remove(itemNumber);
->>>>>>> Stashed changes
 		
 	}
 	

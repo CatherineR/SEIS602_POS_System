@@ -133,8 +133,10 @@ public class Register {
 	}
 	
 	public void removeItemList(int itemNumber){
-		System.out.println("Not tested, wenjing needs to support this in sales order class.");
-		receipt.removeItemList(itemNumber-1);
+		if(itemNumber>=0)
+			receipt.removeItemList(itemNumber-1);
+		else
+			System.out.println(itemNumber + " is an invalid entry.\n");
 	}
 	
 	public void returnSalesOrder(UUID salesOrderID){
