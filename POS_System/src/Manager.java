@@ -41,7 +41,7 @@ public class Manager extends Cashier {
 			}
 		}
 		if(noNewOrders){
-			System.out.println("Inventory quantity is good. No new orders creared.");
+			System.out.println("Inventory quantity is good. No new orders created.");
 		}
 	}
 	

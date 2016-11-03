@@ -82,7 +82,7 @@ public class InventoryListDAO {
 	public void adjustItemQuantity(String name, int adjustmentAmount){
 		List<InventoryItem> inventoryList = getInventoryList();
 		for(InventoryItem item : inventoryList){
-			if(item.getName().equals(name)){
+			if(item.getName().toLowerCase().equals(name.toLowerCase())){
 				if((item.getInventoryQuantity()+adjustmentAmount) >= 0){
 					int newQuantity = item.getInventoryQuantity() + adjustmentAmount;	
 					item.setInventoryQuantity(newQuantity);	
@@ -100,12 +100,12 @@ public class InventoryListDAO {
 	public void addItem(String itemName, int quantity, double price, 
 		String supplier, double taxRate, int threshold){
 		List<InventoryItem> inventoryList = getInventoryList();
-		InventoryItem newItem = new InventoryItem(itemName,quantity,price,supplier,taxRate,threshold);
+		InventoryItem newItem = new InventoryItem(itemName.toLowerCase(),quantity,price,supplier,taxRate,threshold);
 		boolean itemExists = false;
 		
 		//Check if the item is already in inventory
 		for(InventoryItem item : inventoryList){
-			if(item.getName().equals(newItem.getName())){
+			if(item.getName().toLowerCase().equals(newItem.getName().toLowerCase())){
 				itemExists = true;
 			}
 		}
@@ -117,16 +117,16 @@ public class InventoryListDAO {
 			JsonArray jsonArray = invListToJson(inventoryList);
 			jsonObject.replace("inventoryItems", jsonArray);
 			writeToFile(jsonObject);
-			System.out.println(newItem.getName() + " has been added to inventory.");
+			System.out.println(newItem.getName().toLowerCase() + " has been added to inventory.");
 		}
 		else{
-			System.out.println(itemName + " already exists.");
+			System.out.println(itemName.toLowerCase() + " already exists.");
 		}
 	}
 	
 	public void deleteItem(String name){
 		List<InventoryItem> inventoryList = getInventoryList();
-		int itemIndexToRemove = findInventoryItemInt(name);
+		int itemIndexToRemove = findInventoryItemInt(name.toLowerCase());
 		
 		inventoryList.remove(itemIndexToRemove);
 		JSONObject jsonObject = openFile();			
@@ -143,7 +143,7 @@ public class InventoryListDAO {
 		
 		//loop through inventory to find item
 		for(InventoryItem item : inventoryList){
-			if(item.getName().equals(name)){
+			if(item.getName().toLowerCase().equals(name.toLowerCase())){
 				itemToReturn = item;
 				itemFound = true;
 			}
@@ -165,7 +165,7 @@ public class InventoryListDAO {
 		//loop through inventory to find item
 		for(InventoryItem item : inventoryList){
 			count++;
-			if(item.getName().equals(name)){
+			if(item.getName().toLowerCase().equals(name.toLowerCase())){
 				returnCount=count-1;
 				itemFound = true;
 			}

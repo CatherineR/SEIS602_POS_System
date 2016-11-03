@@ -5,3 +5,4 @@ bd25438e-66a1-4002-8517-b9f22c802479|0|olaniCashier|cashier|Thu Nov 03 00:37:16 
 a9a0256b-b49c-4781-8968-730bd08cd88b|1|olaniManager|manager|Thu Nov 03 00:45:50 CDT 2016|Thu Nov 03 00:45:50 CDT 2016|0.0|0
 a9269f3a-ed26-41c6-96fd-c421de8eba86|23|olaniCashier|cashier|Thu Nov 03 00:45:50 CDT 2016|Thu Nov 03 00:45:50 CDT 2016|47.5|2
 e65098e8-3ba9-4088-8aa1-a6bc997ab139|1|olaniManager|manager|Thu Nov 03 00:45:56 CDT 2016|Thu Nov 03 00:45:56 CDT 2016|0.0|0
+b70d580c-4b20-4275-9855-b5cac1d5a410|2|OlaniManager|manager|Thu Nov 03 06:41:41 PDT 2016|Thu Nov 03 06:42:40 PDT 2016|0.0|0

@@ -3,10 +3,10 @@ import java.util.Scanner;
 public class POS_System {
 	
 	
-	Register register2 = new Register();
+	private static Register register1;
 	
 	public static void main(String[] args){
-		Register register1 = new Register();
+		
 	    Scanner input = new Scanner(System.in);
 	    
 		System.out.println("Welcome to the Point-Of-Sale Registration System" + "\n");
@@ -16,6 +16,16 @@ public class POS_System {
 			System.out.println("Type in 'Quit' to exit");
 			inputText = input.nextLine();
 			if(inputText.equals("1")){
+				System.out.println("Type in '1' if you would like to use Register 1");
+				System.out.println("Type in '2' if you would like to yse Register 2");
+				String registerChoice =  input.nextLine();
+				if(registerChoice.equals("1")){
+					register1 = new Register(1);
+				}
+				else{
+					register1 = new Register(2);
+				}
+				
 				while(!register1.getIsLoggedIn()){
 					System.out.print("Please enter your username: ");			
 					String userName = input.nextLine();
@@ -55,12 +65,12 @@ public class POS_System {
 							
 							}
 							
-						}					
+										
 					}while(!command.equals("0"));//end Cashier menu
 				}
 				register1.logout();
 			}
-		while(!inputText.equals("Quit"));
+		}while(!inputText.equals("Quit"));
 		System.out.println("Goodbye");
 	 
 	}
@@ -80,42 +90,38 @@ public class POS_System {
 		{
 		//Register.removeItem();
 			
-			register1.removeItem(name, quantity);
+			//register1.removeItem(name, quantity);
 		}
 		if(choise==3){
 			//exit to main menu
 		}
 	}
 	private static void doScan(){
-		System.out.println("************Scanning begins************");
-				Register register1=new Register();
+		System.out.println("************Scanning begins************");				
 				register1.beginTransaction();
 				Scanner input = new Scanner(System.in);
+				String scanInput;
 				do
 				{
 					System.out.println("Input the item's name  then press enter");
 					String name=input.next();
 					System.out.println("Input the item's quantity then press enter");
 				    int quantity=input.nextInt();
+				    register1.addItem(name, quantity);
+				    
 					System.out.println("Enter 'Y' to continue or enter 'N' to check out ");
-					if(input.next().equals("Y"))
-					{
-					register1.addItem(name, quantity);
+					scanInput = input.next();
+
 					
-							                           }
-					else if(input.next().equals("N"))
-							
-					{	
-						doCheckOut();
-						}
+					
 				}
-				while(true);
+				while(!scanInput.equals("N"));
+				doCheckOut();
 				
 	}
 	private static void doCheckOut(){
 			System.out.println("*************Check out ************");
 			//print salesorder(receipt) and total price
-			Register register1=new Register();
 			register1.commitTransaction();
 			System.out.println("Cashier No.");
 			System.out.println("Total price:");

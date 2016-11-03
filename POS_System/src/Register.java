@@ -116,7 +116,7 @@ public class Register {
 			 totalTransactions ++;
 			 receipt.commitSalesOrder();
 			 receipt.showReceipt();
-			 receipt = null;
+			 //receipt = null;
 		 }
 		 else{
 			 System.out.println("Commit denied. Please begin transaction before attempting to commit.");
