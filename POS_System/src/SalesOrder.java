@@ -36,7 +36,7 @@ public class SalesOrder {
 		return this.numItem;
 	}
 	public int getQuantity(){
-		return (item.getorderQuantity());
+		return item.getorderQuantity();
 	}
 	
 	public String getname(){
@@ -61,19 +61,23 @@ public class SalesOrder {
 		this.itemList = itemList;
 	}
 	public void addItemList(SalesOrderItem item) {
-		//inventory name needed
-		//if(inventory.getInventoryItem(item.getname()).equals(item.getname()))
-		//	{
-		//itemList.add(item);
+		
+		itemList.add(item);
 		//inventory.updateInventoryQuantity(item.getname(),item.getorderQuantity());
 		totalPrice += item.getprice();
 		
-			
-	}
-	public void removeItemList(SalesOrderItem item) {
 		
-		itemList.remove(item);
-		totalPrice -= item.getprice();
+	}
+	public void removeItemList(String name) {
+		
+		for(SalesOrderItem item : itemList)
+		{if(item.getname().equals(name))
+			{
+			itemList.remove(item);
+			totalPrice -= item.getprice();
+			}
+		}
+		
 	}
 	
 	public void cancelOrder(){
