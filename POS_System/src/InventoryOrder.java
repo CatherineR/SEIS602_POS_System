@@ -21,7 +21,7 @@ public class InventoryOrder {
 		
 	}
 	
-	public InventoryOrder(String sName,String iName,int oQuantity, 
+	public InventoryOrder(String iName, String sName, int oQuantity, 
 			double iPrice, Date oDate){
 		orderId = UUID.randomUUID();
 		

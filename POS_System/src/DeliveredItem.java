@@ -3,7 +3,6 @@ import java.util.UUID;
 
 public class DeliveredItem {
 	UUID orderID;
-	Date fulfillmentDate;
 	
 	public DeliveredItem(){
 		

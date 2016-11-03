@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Test;
 
@@ -45,13 +46,21 @@ public class ManagerTests {
 	@Test
 	public void testCreateOrders() {
 		Manager m = new Manager();
+		m.addInventoryItem("test_3", 10, 2.50, "test_2 supplier", .1, 40);
+		InventoryOrderDAO invOrdDAO = new InventoryOrderDAO();
+		
 		m.createOrders();
+		List <InventoryOrder> testList = invOrdDAO.getInventoryOrders();
+		assertEquals(testList.get(testList.size()-1).getItemName(),"test_3");
+		m.removeInventoryItem("test_3");
 	}
 	@Test
 	public void testfulfillOrders() {
 		Manager m = new Manager();
+
+		
 		m.fullfillInventoryOrder();
-				
+	
 	}
 
 }
