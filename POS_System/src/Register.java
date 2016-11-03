@@ -28,8 +28,7 @@ public class Register {
 	public Register(int registerID){
 		this.registerID = registerID;
 	}
-	public void login(String userName, String password){
-		System.out.println("Please insert user name followed by password");
+	public void login(String userName, String password){		
 		String employeeRole = "1. not available";
 		if(!isLoggedIn){
 			
