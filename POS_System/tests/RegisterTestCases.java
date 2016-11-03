@@ -23,6 +23,7 @@ public class RegisterTestCases {
 		
 		register1.login("olaniCashier", "1234");
 		
+		assertEquals(false,register1.hasTransaction());
 		register1.beginTransaction();
 		register1.addItem("bread", 2);
 		register1.addItem("cheese", 1);
@@ -31,12 +32,18 @@ public class RegisterTestCases {
 		register1.addItem("bread", 2);
 		register1.addItem("cheese", 10);
 		System.out.println( "your change is:" + String.format("%.2f",register1.receivePayment(40)));
+		
 		register1.commitTransaction();
+		assertTrue(register1.getRegisterSession() != null);
+		assertEquals(true,register1.hasTransaction());
 		
 		System.out.println("Final transaction details: " + 
 				register1.getUserName() + " "+ 
 				register1.getTotalTransactions() + " "+ 
 				register1.getSessionTotalSale());
+		
+		
+		
 		register1.logout();
 		
 		
