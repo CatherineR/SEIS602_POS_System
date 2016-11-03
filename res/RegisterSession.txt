@@ -1,0 +1,7 @@
+registerSession|registerID|userName|userRole|sessionStartTime|sessionEndTime|sessionTotalSale|totalTransactions
+bd25438e-66a1-4002-8517-b9f22c802479|0|olaniCashier|cashier|Thu Nov 03 00:37:16 CDT 2016|Thu Nov 03 00:37:16 CDT 2016|48.2|2
+21f8174a-416d-4465-a78c-3524409b6bb5|0|olaniCashier|cashier|Thu Nov 03 00:40:33 CDT 2016|Thu Nov 03 00:40:33 CDT 2016|48.2|2
+420bf893-a87b-49bc-bcf3-1567f6345869|0|olaniCashier|cashier|Thu Nov 03 00:40:38 CDT 2016|Thu Nov 03 00:40:39 CDT 2016|48.2|2d30dc0eb-016c-4980-8d51-4975ad801768|23|olaniCashier|cashier|Thu Nov 03 00:45:40 CDT 2016|Thu Nov 03 00:45:40 CDT 2016|47.5|2
+a9a0256b-b49c-4781-8968-730bd08cd88b|1|olaniManager|manager|Thu Nov 03 00:45:50 CDT 2016|Thu Nov 03 00:45:50 CDT 2016|0.0|0
+a9269f3a-ed26-41c6-96fd-c421de8eba86|23|olaniCashier|cashier|Thu Nov 03 00:45:50 CDT 2016|Thu Nov 03 00:45:50 CDT 2016|47.5|2
+e65098e8-3ba9-4088-8aa1-a6bc997ab139|1|olaniManager|manager|Thu Nov 03 00:45:56 CDT 2016|Thu Nov 03 00:45:56 CDT 2016|0.0|0

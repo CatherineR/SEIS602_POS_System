@@ -14,8 +14,13 @@ public class SalesOrderTest {
 
 	@Test
 	public void test() {
+<<<<<<< Updated upstream
 		SalesOrderItem s1=new SalesOrderItem("bread",1);
 		SalesOrderItem s2=new SalesOrderItem("cheese",1);
+=======
+		SalesOrderItem s1=new SalesOrderItem("bread", 1);
+		SalesOrderItem s2=new SalesOrderItem("cheese", 2);
+>>>>>>> Stashed changes
 		s1.setItemID("1");
 		s2.setItemID("2");
 		s1.getItemID();

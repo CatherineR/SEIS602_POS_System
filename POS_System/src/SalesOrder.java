@@ -49,9 +49,6 @@ public class SalesOrder {
 	public double gettaxRate(){
 		return(item.gettaxRate());
 	}
-	public double setTotalCprice(){
-		return totalPrice=((item.getprice()*(1+item.gettaxRate())));
-	}
 	public double getTotalprice(){
 		return this.totalPrice;
 	}
@@ -61,6 +58,7 @@ public class SalesOrder {
 		this.itemList = itemList;
 	}
 	public void addItemList(SalesOrderItem item) {
+<<<<<<< Updated upstream
 		
 		itemList.add(item);
 		//inventory.updateInventoryQuantity(item.getname(),item.getorderQuantity());
@@ -77,6 +75,17 @@ public class SalesOrder {
 			totalPrice -= item.getprice();
 			}
 		}
+=======
+		itemList.add(item);
+		totalPrice = totalPrice + item.getSubTotal();
+		numItem = numItem + item.getorderQuantity(); 
+			
+	}
+	public void removeItemList(int itemNumber) {
+		
+		totalPrice -= itemList.get(itemNumber).getSubTotal();
+		itemList.remove(itemNumber);
+>>>>>>> Stashed changes
 		
 	}
 	
@@ -90,9 +99,9 @@ public class SalesOrder {
 	
 	public void showReceipt(){
 		for(int i =0; i<itemList.size(); i++){
-			System.out.println((i+1)+"\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getprice());
-		
+			System.out.println((i+1)+".\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getSubTotal());
 		}
+		System.out.println("\t\t\t" + "Total:" + this.getTotalprice());
 	}
 	public void commitSalesOrder(){
 		for(int i =0; i<itemList.size(); i++){

@@ -8,10 +8,16 @@ public class SalesOrderItem {
 	
 
 public SalesOrderItem(String name,int orderQuantity){
-	   this.name=name;
-	   this.orderQuantity=orderQuantity;
-	   
+	Inventory item = new Inventory();
+	InventoryItem itemDetails = item.getInventoryItem(name);	
+	this.name=name;
+	this.orderQuantity=orderQuantity;
+	this.itemPrice = itemDetails.getPrice();
+	this.taxRate = itemDetails.getTaxRate();
+	this.subTotal = (1 + this.taxRate/100)*(this.itemPrice * this.orderQuantity);
+	
 }
+
 public String setItemID(String itemID){
 	   return this.itemID = itemID;
 }
@@ -34,5 +40,8 @@ public double getprice(){
 	   return inventory.getInventoryItem(name).getPrice();
 }
 
+public double getSubTotal(){
+	return this.subTotal;
+}
 
 }

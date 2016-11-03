@@ -1,10 +1,18 @@
 import java.util.UUID;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Register {
 	private final String EmployeeFile = "./././res/EmployeeFile.txt";
+	private Path registerSessionFile  = Paths.get("./././res/RegisterSession.txt");
 	private int registerID;
 	private UUID registerSession;
 	private String userName;
@@ -14,7 +22,12 @@ public class Register {
 	private Date sessionEndTime;
 	private Scanner scan;
 	private SalesOrder receipt;
+	private double sessionTotalSale;
+	private int totalTransactions;
 	
+	public Register(int registerID){
+		this.registerID = registerID;
+	}
 	public void login(String userName, String password){
 		System.out.println("Please insert user name followed by password");
 		String employeeRole = "1. not available";
@@ -28,6 +41,7 @@ public class Register {
 				this.userRole = employeeRole;
 				this.isLoggedIn = true;
 				this.sessionStartTime = new Date();
+				this.sessionEndTime = null;
 				this.registerSession = UUID.randomUUID();
 				System.out.println("Welcome to POS system,"+ this.userName + "!\n"+
 									"You have been logged in as: " + employeeRole
@@ -44,11 +58,18 @@ public class Register {
 		}
 	
 	public void logout(){
-		this.sessionEndTime = new Date();
+		String sessionUserName = this.userName;
+		
 		this.isLoggedIn = false;
-		System.out.println(this.userName + ": You have successfully logged out of the system.\nLogoff time: " + this.sessionEndTime);
+		this.sessionEndTime = new Date();
+		this.logRegisterSession();
 		this.userName = null;
 		this.registerSession = null;
+		this.receipt = null;
+		this.totalTransactions = 0;
+		this.sessionTotalSale = 0.0;
+		System.out.println(sessionUserName+ ": You have successfully logged out of the system." +
+							"\nLogoff time: " + this.sessionEndTime);
 	}
 	
 	
@@ -90,17 +111,30 @@ public class Register {
 	}
 	
 	public void commitTransaction(){
-		 receipt.commitSalesOrder();
+		 if(hasTransaction() == true){
+			 sessionTotalSale = sessionTotalSale +receipt.getTotalprice();
+			 totalTransactions ++;
+			 receipt.commitSalesOrder();
+			 receipt.showReceipt();
+			 receipt = null;
+		 }
+		 else{
+			 System.out.println("Commit denied. Please begin transaction before attempting to commit.");
+		 }
 	}
 	
 	public void addItem(String name, int quantity){
-		System.out.println("not tested yet.");
-		receipt.addItemList(new SalesOrderItem(name, quantity));
+		if(hasTransaction() == true){
+			receipt.addItemList(new SalesOrderItem(name, quantity));
+		}
+		else{
+			 System.out.println("Item not added. Please begin transaction before attempting to add item.");
+		 }
 	}
 	
-	public void removeItem(String name){
+	public void removeItemList(int itemNumber){
 		System.out.println("Not tested, wenjing needs to support this in sales order class.");
-		receipt.removeItemList(name);
+		receipt.removeItemList(itemNumber-1);
 	}
 	
 	public void returnSalesOrder(UUID salesOrderID){
@@ -112,8 +146,9 @@ public class Register {
 		return receipt.getTotalprice();
 	}
 	
-	public void receivePayment(double payment){
-		System.out.println("to be implemented");
+	public double receivePayment(double payment){
+		double change = payment - receipt.getTotalprice();
+		return change;
 	}
 	//open the employee file.
 	
@@ -164,5 +199,36 @@ public class Register {
 		return sessionEndTime;
 	}
 	
+	public void logRegisterSession(){
+		int counter =0;
+		while((isLoggedIn==false) && (sessionEndTime!=null) && counter<1){
+			Charset charset = Charset.forName("US-ASCII");
+			try(BufferedWriter writer = Files.newBufferedWriter(registerSessionFile, charset, StandardOpenOption.APPEND)) {
+				String sessionInfo = registerSession + "|" + registerID+ "|" +userName + "|" + userRole + "|" +
+									sessionStartTime + "|" + sessionEndTime + "|" + sessionTotalSale + "|" +totalTransactions;
+				
+				writer.append(sessionInfo);
+				writer.newLine();
+				writer.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+			counter++;
+		}
+	}
 	
+	public double getTotalTransactions(){
+		return totalTransactions;
+	}
+	
+	public double getSessionTotalSale(){
+		return sessionTotalSale;
+	}
+	
+	public void showReceipt(){
+		if(this.hasTransaction())
+			receipt.showReceipt();
+		else
+			System.out.println("No pending receipt to display.");
+	}
 }
