@@ -97,7 +97,7 @@ public class SalesOrder {
 		for(int i =0; i<itemList.size(); i++){
 			//System.out.println((i+1)+"\t" +itemList.get(i).getname() + "\t"+ itemList.get(i).getorderQuantity() +"\t"+ itemList.get(i).getprice());
 			Inventory inventory = new Inventory();
-			inventory.updateInventoryQuantity(itemList.get(i).getname(), itemList.get(i).getorderQuantity());
+			inventory.updateInventoryQuantity(itemList.get(i).getname(), -itemList.get(i).getorderQuantity());
 		}
 	}
 }
