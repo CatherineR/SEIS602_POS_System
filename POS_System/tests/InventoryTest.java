@@ -27,7 +27,7 @@ public class InventoryTest {
 		int quantityBefore = inv.getInventoryItem("milk").getInventoryQuantity();
 		inv.updateInventoryQuantity("milk", -1);
 		int quantityAfter = inv.getInventoryItem("milk").getInventoryQuantity();
-		assertEquals(quantityBefore+1,quantityAfter);
+		assertEquals(quantityBefore-1,quantityAfter);
 	}	
 	
 	@Test
