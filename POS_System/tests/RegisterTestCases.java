@@ -49,4 +49,20 @@ public class RegisterTestCases {
 		
 	}
 	
+	@Test
+	public void testcommitSalesOrder2(){
+		Register register1 = new Register(23);
+		
+		register1.login("olaniCashier", "1234");
+		
+		assertEquals(false,register1.hasTransaction());
+		register1.beginTransaction();
+		assertEquals(true,register1.hasTransaction());
+		register1.addItem("bread", 1);
+		register1.addItem("cheese", 1);
+		register1.cancelTransaction();
+		assertNull(register1.cancelTransaction());
+		assertEquals(false,register1.hasTransaction());
+		
+	}
 }
