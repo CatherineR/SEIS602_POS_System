@@ -98,39 +98,58 @@ public class POS_System {
 	}
 	private static void doScan(){
 		System.out.println("************Scanning begins************");				
-				register1.beginTransaction();
-				Scanner input = new Scanner(System.in);
-				String scanInput;
-				do
-				{
-					System.out.println("Input the item's name  then press enter");
-					String name=input.next();
-					System.out.println("Input the item's quantity then press enter");
-				    int quantity=input.nextInt();
-				    register1.addItem(name, quantity);
-				    
-					System.out.println("Enter 'Y' to continue or enter 'N' to check out ");
-					scanInput = input.next();
-
-					
-					
-				}
-				while(!scanInput.equals("N"));
-				doCheckOut();
+		register1.beginTransaction();
+		Scanner input = new Scanner(System.in);
+		String scanInput;
+		do{
+			System.out.println("Input the item's name then press enter");
+			String name=input.next();
+			System.out.println("Input the item's quantity then press enter");
+		    int quantity=input.nextInt();
+		    register1.addItem(name, quantity);
+		    
+		
+			System.out.println("Enter 'Y' to continue or enter 'N' to check out or enter 'R' to remove item ");
+			scanInput = input.next();
+			if(scanInput.equals("R"))
+			{
+				doRemover();
+			}
+		}
+		while(!scanInput.equals("N"));
+		doCheckOut();
+				
+				
 				
 	}
 	private static void doCheckOut(){
-			System.out.println("*************Check out ************");
+			System.out.println("*************Check out **************");
+			
 			//print salesorder(receipt) and total price
+			System.out.println("User:"+register1.getUserName());
 			register1.commitTransaction();
-			System.out.println("Cashier No.");
-			System.out.println("Total price:");
-			//tracks payment 
-			register1.receivePayment(register1.totalSale());
+			
+			System.out.println("Payment amount received:");
+			Scanner input = new Scanner(System.in);
+			double payment=input.nextDouble();
+			System.out.println("Received payments:"+payment);
+			System.out.println("Change is:"+register1.receivePayment(payment));
+			
+			
+			
 			
 	}
 		
-						
+	private static void doRemover(){
+		Scanner input=new Scanner(System.in);	
+		do{
+		System.out.println("**************Input item's number you want to remove**********");
+			register1.removeItemList(input.nextInt());
+		System.out.println("Items have been removed from order successfully");
+		System.out.println("Enter '1' to continue removing or enter any number go back to scan");
+		  }
+		while(input.nextInt()==1);
+	}
 				
 			
 			
