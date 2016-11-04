@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,6 +77,21 @@ public class SalesOrderTest {
 	  // System.out.println(receipt.getTotalprice());
 	    
 	    
+	}
+	@Test
+	public void testLogSalesOrder(){
+		SalesOrder sales = new SalesOrder();
+		UUID regSession = UUID.randomUUID();
+		sales.addItemList(new SalesOrderItem("bread", 2));
+		sales.addItemList(new SalesOrderItem("milk", 1));
+		sales.logTransaction(regSession);
+		
+	}
+	
+	@Test
+	public void testReturnSalesOrder(){
+		SalesOrder sales = new SalesOrder();
+		sales.returnSalesOrder("bbc46ed0-786c-493c-8dc1-d9b68652852f", "milk", 5);
 	}
 }
 

@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -137,5 +138,49 @@ public class SalesOrder {
 			} catch (IOException e) {
 				System.out.println("error with" + e.getMessage());
 			}
+	}
+
+	public double returnSalesOrder(String salesOrderID, String itemName, int quantity){
+		double returnAmount = 0.0;
+		int validQuantity = 0;
+		Charset charset = Charset.forName("US-ASCII");
+		try(BufferedReader reader = Files.newBufferedReader(saleTransactionFile, charset)){
+			String saleLog = null;
+			String[] saleInfo;
+			while ((saleLog = reader.readLine()) != null ){
+				saleInfo=saleLog.split("[|]");
+				//System.out.println(saleInfo[0]);
+				if(saleInfo[0].equals(salesOrderID)){
+					//System.out.println("here here " + saleInfo[2] + " " + saleInfo[4]);
+					if (saleInfo[2].equals(itemName)){
+						if(Integer.parseInt(saleInfo[3])<=quantity){
+							Inventory inventoryReturn = new Inventory();
+							returnAmount = (Double.parseDouble(saleInfo[4])/Integer.parseInt(saleInfo[3]))*quantity;
+							//inventoryReturn.updateInventoryQuantity(itemName, -quantity);			//add the returned item back to inventory;
+							System.out.println("You are getting back $" + returnAmount + "\n");
+							break;
+						}
+						else
+						{
+							validQuantity = Integer.parseInt(saleInfo[3]);
+							returnAmount =-1;
+							break;
+						}	
+					}
+				}
+			}
+			reader.close();
+		}catch (IOException e){
+			System.out.println(" return Sales Order encountered an error: " + e.getMessage());
+		}
+		
+		if(returnAmount==0){
+			System.out.println("Sorry, we can't locate records matching your inputs for salesOrderID " +salesOrderID);
+		}
+		if (returnAmount == -1)
+		{
+			System.out.println(quantity+ " is an invalid amount! Please try again with " +validQuantity  + " or less items.");
+		}
+		return returnAmount;
 	}
 }

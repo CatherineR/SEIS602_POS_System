@@ -94,12 +94,26 @@ public class POS_System {
 		{
 		//Register.removeItem();
 			
-			//register1.removeItem(name, quantity);
+			Scanner returnItem = new Scanner(System.in);
+			String salesOrderIDReturn;
+			String itemNameReturn;
+			int quantityReturns;
+			
+			System.out.println("What is the SalesOrderID for the item being returned?\n");
+			salesOrderIDReturn = returnItem.nextLine();
+			System.out.println("What is the item name?\n");
+			itemNameReturn = returnItem.nextLine();
+			System.out.println("How many "+ itemNameReturn +" are you returning ?\n");
+			quantityReturns = returnItem.nextInt();
+			
+			register1.returnItem(salesOrderIDReturn, itemNameReturn, quantityReturns);
+			//returnItem.close();
+			
 		}
 		
 		case 3:
 		
-			doLookSalesAmount();
+			//doLookSalesAmount();
 			break;
 		
 		case 4:
@@ -108,9 +122,9 @@ public class POS_System {
 	}
 	private static void doLookSalesAmount() throws NumberFormatException, IOException, ParseException{
 		register1.getSaleAmount();
-		System.out.println("Total sale for this register"+register1.getRegisterID()+"is:"+"\t"+register1.getRegisterTotal());
-		System.out.println("Total sale for this user:"+register1.getUserName()+"is"+"\t"+register1.getUserTotalSale());
-		System.out.println("Total sale during this user's shift is:"+register1.getUserShiftTotal());
+		//System.out.println("Total sale for this register"+register1.getRegisterID()+"is:"+"\t"+register1.getRegisterTotal());
+		//System.out.println("Total sale for this user:"+register1.getUserName()+"is"+"\t"+register1.getUserTotalSale());
+		//System.out.println("Total sale during this user's shift is:"+register1.getUserShiftTotal());
 	}
 	
 	private static void doScan(){
@@ -169,6 +183,7 @@ public class POS_System {
 		Scanner input=new Scanner(System.in);	
 		do{
 		System.out.println("**************Input item's number you want to remove**********");
+			register1.showReceipt();
 			register1.removeItemList(input.nextInt());
 		System.out.println("Items have been removed from order successfully");
 		System.out.println("Enter '1' to continue removing or enter any number go back to scan");

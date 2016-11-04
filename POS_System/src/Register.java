@@ -35,6 +35,7 @@ public class Register {
 	private SalesOrder receipt;
 	private double sessionTotalSale;
 	private int totalTransactions;
+	private double sessionReturnAmout;
 	private double UserTotalfromLog=0.0;
 	private double UserShiftTotalfromLog=0.0;
 	private double RegisterTotalfromLog=0.0;
@@ -155,7 +156,7 @@ public class Register {
 			System.out.println(itemNumber + " is an invalid entry.\n");
 	}
 	
-	public void returnSalesOrder(UUID salesOrderID){
+	public void returnSalesOrder(String salesOrderID){
 		System.out.println("to be implemented");
 	}
 	
@@ -223,7 +224,7 @@ public class Register {
 			Charset charset = Charset.forName("US-ASCII");
 			try(BufferedWriter writer = Files.newBufferedWriter(registerSessionFile, charset, StandardOpenOption.APPEND)) {
 				String sessionInfo = registerSession + "|" + registerID+ "|" +userName + "|" + userRole + "|" +
-									sessionStartTime + "|" + sessionEndTime + "|" + sessionTotalSale + "|" +totalTransactions;
+									sessionStartTime + "|" + sessionEndTime + "|" + sessionTotalSale + "|" +totalTransactions + "|" + sessionReturnAmout;
 				
 				writer.append(sessionInfo);
 				writer.newLine();
@@ -315,5 +316,10 @@ public class Register {
 	public double getRegisterTotal(){
 		return RegisterTotalfromLog;
 	}
-	
+
+	public double returnItem(String salesOrderID, String itemName, int quantity){
+		SalesOrder returns= new SalesOrder();
+		sessionReturnAmout+=returns.returnSalesOrder(salesOrderID, itemName, quantity);
+		return 0.0;
+	}
 }

@@ -6,3 +6,6 @@ a9a0256b-b49c-4781-8968-730bd08cd88b|1|olaniManager|manager|Thu Nov 03 00:45:50 
 a9269f3a-ed26-41c6-96fd-c421de8eba86|23|olaniCashier|cashier|Thu Nov 03 00:45:50 CDT 2016|Thu Nov 03 00:45:50 CDT 2016|47.5|2
 e65098e8-3ba9-4088-8aa1-a6bc997ab139|1|olaniManager|manager|Thu Nov 03 00:45:56 CDT 2016|Thu Nov 03 00:45:56 CDT 2016|0.0|0
 b70d580c-4b20-4275-9855-b5cac1d5a410|2|OlaniManager|manager|Thu Nov 03 06:41:41 PDT 2016|Thu Nov 03 06:42:40 PDT 2016|0.0|0
+47e1de17-3490-4739-88b3-03ba2a035bda|1|olaniCashier|cashier|Fri Nov 04 15:37:25 CDT 2016|Fri Nov 04 15:39:44 CDT 2016|15.0|1
+bd91b0de-3fe2-40fb-88d3-dd83cc8ef422|1|olaniCashier|cashier|Fri Nov 04 17:22:26 CDT 2016|Fri Nov 04 17:25:28 CDT 2016|12.5|1
+ed629d62-1093-418d-9a40-19edea3826b0|1|olaniCashier|cashier|Fri Nov 04 17:50:08 CDT 2016|Fri Nov 04 17:50:58 CDT 2016|7.5|1
