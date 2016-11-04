@@ -166,9 +166,10 @@ public class POS_System {
 		do{
 		System.out.println("----------");	
 		System.out.println("Enter '1' to update inventory quantity");
-		System.out.println("Enter '2' to add inventory items");
-		System.out.println("Enter '3' to create inventory orders");
-		System.out.println("Enter '4' to fulfill inventory orders");
+		System.out.println("Enter '2' to add an inventory item");
+		System.out.println("Enter '3' to remove an inventory item");
+		System.out.println("Enter '4' to create inventory orders");
+		System.out.println("Enter '5' to fulfill inventory orders");
 		System.out.println("Enter '0' to exit");
 		Scanner input = new Scanner(System.in);
 		
@@ -197,9 +198,14 @@ public class POS_System {
 				
 			}
 			if(choice.equals("3")){
-				manager.createOrders();
+				System.out.println("What is the name of the item to remove from inventory? ");
+				String oldInventoryItemName = input.nextLine();
+				manager.removeInventoryItem(oldInventoryItemName);
 			}
 			if(choice.equals("4")){
+				manager.createOrders();
+			}
+			if(choice.equals("5")){
 				manager.fullfillInventoryOrder();
 			}
 			
