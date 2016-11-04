@@ -1,5 +1,13 @@
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.junit.Test;
 
 public class RegisterTestCases {
@@ -65,4 +73,51 @@ public class RegisterTestCases {
 		assertEquals(false,register1.hasTransaction());
 		
 	}
+	
+	public void getRegisterTotalSale() throws NumberFormatException, IOException, ParseException{
+		Register register1 = new Register(2);
+			String path="./././res/RegisterSession.txt";
+			register1.setUserName("olaniCashier");
+			BufferedReader bufferLog = null;
+			try {
+			    bufferLog= new BufferedReader(new FileReader(path));
+			    String singleLineLog = null;
+			    double RegisterTotalfromLog=0.0;
+			    singleLineLog=bufferLog.readLine();
+			    
+			    while ((singleLineLog = bufferLog.readLine()) != null) 
+			      {
+			    	String[] splited = singleLineLog.split("[|]");
+			    	if(splited[2].equals(register1.getUserName()))
+			    	{
+			    		double sessionTotalformLog=Double.parseDouble(splited[6]);
+			    		RegisterTotalfromLog=RegisterTotalfromLog+sessionTotalformLog;
+			    	}
+			       
+			        
+			     }
+			    System.out.println(RegisterTotalfromLog);
+			} catch (IOException e) {
+			    System.out.println("There was a problem: " + e);
+			    e.printStackTrace();
+			} finally {
+			    try {
+			        bufferLog.close();
+			    } catch (Exception e) {
+			    }
+			}
+			
+			
+			
+	
+	}
 }
+
+
+	
+	
+	
+	
+	
+	
+	
