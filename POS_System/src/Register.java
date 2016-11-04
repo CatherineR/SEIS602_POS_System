@@ -1,13 +1,24 @@
 import java.util.UUID;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Register {
@@ -234,4 +245,45 @@ public class Register {
 		else
 			System.out.println("No pending receipt to display.");
 	}
+		
+	public void getRegisterTotalSale() throws NumberFormatException, IOException, ParseException{
+		
+			String path="./././res/RegisterSession.txt";
+			
+			BufferedReader bufferLog = null;
+			try {
+			    bufferLog= new BufferedReader(new FileReader(path));
+			    String singleLineLog = null;
+			    double RegisterTotalfromLog=0.0;
+			    singleLineLog=bufferLog.readLine();
+			    
+			    while ((singleLineLog = bufferLog.readLine()) != null) 
+			      {
+			    	String[] splited = singleLineLog.split("[|]");
+			    	if(splited[2].equals(getUserName()))
+			    	{
+			    		double sessionTotalformLog=Double.parseDouble(splited[6]);
+			    		RegisterTotalfromLog=RegisterTotalfromLog+sessionTotalformLog;
+			    	}
+			       
+			        
+			     }
+			    System.out.println(RegisterTotalfromLog);
+			} catch (IOException e) {
+			    System.out.println("There was a problem: " + e);
+			    e.printStackTrace();
+			} finally {
+			    try {
+			        bufferLog.close();
+			    } catch (Exception e) {
+			    }
+			}
+		
+
+		
+	}
+		
+		
+	
+	
 }
