@@ -72,7 +72,7 @@ public class POS_System {
 			}
 		}while(!inputText.equals("Quit"));
 		System.out.println("Goodbye");
-	 
+		System.exit(0);
 	}
 	private static void startSalesMenu(){
 		System.out.println("Type in '1' if you would like to begin scanning items");
@@ -106,7 +106,12 @@ public class POS_System {
 			String name=input.next();
 			System.out.println("Input the item's quantity then press enter");
 		    int quantity=input.nextInt();
-		    register1.addItem(name, quantity);
+		    try{
+		    	register1.addItem(name, quantity);
+		    }
+		    catch(ItemNotFound e){
+		    	System.out.println(e);
+		    }
 		    
 		
 			System.out.println("Enter 'Y' to continue or enter 'N' to check out or enter 'R' to remove item ");
