@@ -139,7 +139,10 @@ public class POS_System {
 			double payment=input.nextDouble();
 			System.out.println("Received payments:"+payment);
 			System.out.println("Change is:"+register1.receivePayment(payment));
-			
+			if(register1.hasTransaction())
+			{ 
+				register1.cancelTransaction();	
+			}	
 			
 			
 			
