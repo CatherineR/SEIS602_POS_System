@@ -73,8 +73,13 @@ public class SalesOrder {
 		}
 	
 	}
+	public void removeItemList(int itemNumber) {
+		totalPrice -= itemList.get(itemNumber).getSubTotal();
+		itemList.remove(itemNumber);
+		
+	}
 	
-public void updateItemList(String name, int quantity) {
+	public void removeItemList(String name, int quantity) {
 		
 		for(SalesOrderItem item : itemList)
 		{if(item.getname().equals(name))
@@ -86,11 +91,7 @@ public void updateItemList(String name, int quantity) {
 		}
 	
 	}
-	public void removeItemList(int itemNumber) {
-		totalPrice -= itemList.get(itemNumber).getSubTotal();
-		itemList.remove(itemNumber);
-		
-	}
+
 	
 	public void cancelOrder(){
 		setNumItem(0);
