@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class POS_System {
@@ -5,7 +7,7 @@ public class POS_System {
 	
 	private static Register register1;
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws NumberFormatException, IOException, ParseException{
 		
 	    Scanner input = new Scanner(System.in);
 	    
@@ -74,28 +76,43 @@ public class POS_System {
 		System.out.println("Goodbye");
 		System.exit(0);
 	}
-	private static void startSalesMenu(){
+	private static void startSalesMenu() throws NumberFormatException, IOException, ParseException{
 		System.out.println("Type in '1' if you would like to begin scanning items");
-		//System.out.println("Type in '2' if you would like to check out");
 		System.out.println("Type in '2' if you would like to return items");	
-		System.out.println("Type in '3' if you would like to go back to main menu");	
+		System.out.println("Type in '3' if you would like to look at sales amount");	
+		System.out.println("Type in '4' if you would like to log out");
 		Scanner input=new Scanner(System.in);
 		int choise=input.nextInt();
-		if(choise==1)
+		switch(choise)
 		{
+		case 1:
 			doScan();
-		}
-
-		if(choise==2)
+		
+			break;
+		case 2:
+			
 		{
 		//Register.removeItem();
 			
 			//register1.removeItem(name, quantity);
 		}
-		if(choise==3){
-			//exit to main menu
+		
+		case 3:
+		
+			doLookSalesAmount();
+			break;
+		
+		case 4:
+			register1.logout();
 		}
 	}
+	private static void doLookSalesAmount() throws NumberFormatException, IOException, ParseException{
+		register1.getSaleAmount();
+		System.out.println("Total sale for this register"+register1.getRegisterID()+"is:"+"\t"+register1.getRegisterTotal());
+		System.out.println("Total sale for this user:"+register1.getUserName()+"is"+"\t"+register1.getUserTotalSale());
+		System.out.println("Total sale during this user's shift is:"+register1.getUserShiftTotal());
+	}
+	
 	private static void doScan(){
 		System.out.println("************Scanning begins************");				
 		register1.beginTransaction();
