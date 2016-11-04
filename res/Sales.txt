@@ -1,0 +1,2 @@
+SelesOrderID|RegisterSessionID|Item Name| quantity|
+subtotal2f40158f-d533-42d8-83de-75f98181fedb|8c81f815-e145-4bc5-974f-8e789763ecc0|bread|1|5.0

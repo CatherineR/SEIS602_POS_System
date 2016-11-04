@@ -129,6 +129,7 @@ public class Register {
 		 if(hasTransaction() == true){
 			 sessionTotalSale = sessionTotalSale +receipt.getTotalprice();
 			 totalTransactions ++;
+			 receipt.logTransaction(registerSession);
 			 receipt.commitSalesOrder();
 			 receipt.showReceipt();
 			 //receipt = null;

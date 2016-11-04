@@ -1,3 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,6 +16,7 @@ public class SalesOrder {
 	private double totalPrice;
 	private SalesOrderItem item;
 	private int numItem;
+	private Path saleTransactionFile= Paths.get("./././res/Sales.txt");
 	
 	
 	public SalesOrder(){
@@ -113,5 +121,21 @@ public class SalesOrder {
 			Inventory inventory = new Inventory();
 			inventory.updateInventoryQuantity(itemList.get(i).getname(), -itemList.get(i).getorderQuantity());
 		}
+	}
+	
+	public void logTransaction(UUID registerSession){
+
+			Charset charset = Charset.forName("US-ASCII");
+			try(BufferedWriter writer = Files.newBufferedWriter(saleTransactionFile, charset, StandardOpenOption.APPEND)) {
+				for (SalesOrderItem item: itemList){
+					String salesInfo = this.salesOrderID +"|"+ registerSession + "|" +item.getname() + "|" +item.getorderQuantity() + "|" + item.getSubTotal();
+					
+					writer.append(salesInfo);
+					writer.newLine();
+				}
+				writer.close();
+			} catch (IOException e) {
+				System.out.println("error with" + e.getMessage());
+			}
 	}
 }
