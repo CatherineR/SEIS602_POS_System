@@ -14,7 +14,7 @@ public SalesOrderItem(String name,int orderQuantity){
 	this.orderQuantity=orderQuantity;
 	this.itemPrice = itemDetails.getPrice();
 	this.taxRate = itemDetails.getTaxRate();
-	this.subTotal = (1 + this.taxRate/100)*(this.itemPrice * this.orderQuantity);
+	this.subTotal = subTotalPrice();
 	
 }
 
@@ -42,6 +42,15 @@ public double getprice(){
 
 public double getSubTotal(){
 	return this.subTotal;
+}
+
+public void setOrderQuantity(int orderQuantity){
+	this.orderQuantity = orderQuantity;
+	this.subTotal = subTotalPrice();
+}
+
+private double subTotalPrice(){
+	return (1 + this.taxRate/100)*(this.itemPrice * this.orderQuantity);
 }
 
 }

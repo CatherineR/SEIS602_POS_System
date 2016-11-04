@@ -73,6 +73,19 @@ public class SalesOrder {
 		}
 	
 	}
+	
+public void updateItemList(String name, int quantity) {
+		
+		for(SalesOrderItem item : itemList)
+		{if(item.getname().equals(name))
+			{
+			totalPrice -= item.getSubTotal();		//remove previous price
+			item.setOrderQuantity(quantity);
+			totalPrice += item.getSubTotal();
+			}
+		}
+	
+	}
 	public void removeItemList(int itemNumber) {
 		totalPrice -= itemList.get(itemNumber).getSubTotal();
 		itemList.remove(itemNumber);
